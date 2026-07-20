@@ -91,6 +91,28 @@ footer{background:var(--brown);color:#fff;text-align:center;padding:28px}
 /* Shared utility classes */
 .mt-14{margin-top:14px}
 
+
+.admin-toolbar{
+  position:sticky; top:72px; z-index:15;
+  display:flex; gap:10px; flex-wrap:wrap; align-items:center;
+  margin:14px auto; padding:12px 16px;
+  max-width:1180px; background:#fffaf6;
+  border:1px solid #d8d0cb; border-radius:16px;
+  box-shadow:0 8px 24px rgba(47,48,47,.08);
+}
+.admin-toolbar strong{margin-right:auto}
+.admin-toolbar button{
+  border:0; border-radius:999px; padding:10px 14px;
+  font-weight:700; cursor:pointer;
+}
+.admin-toolbar .primary{background:#4a2f2f;color:white}
+.admin-toolbar .secondary{background:#e8f3ef;color:#2f302f}
+.notice{
+  max-width:1180px; margin:8px auto 16px; padding:10px 14px;
+  border-radius:12px; background:#edf7f3; color:#2f5f4f;
+  display:none;
+}
+
 </style>
 </head>
 <body>
@@ -104,6 +126,13 @@ footer{background:var(--brown);color:#fff;text-align:center;padding:28px}
     </nav>
   </div>
 </header>
+<div class="admin-toolbar">
+  <strong>Website Editor</strong>
+  <button class="primary" id="downloadUpdatedHtml">Download Updated sharing.html</button>
+  <button class="secondary" id="resetBrowserData">Reset Browser Data</button>
+</div>
+<div class="notice" id="saveNotice"></div>
+
 
 <main>
 <section class="hero">
@@ -461,6 +490,70 @@ function removeEntry(type,index){
 }
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeEditor();});
 renderAll();
+
+
+// ===== PERMANENT UPDATE EXPORT =====
+function showNotice(message){
+  const box = document.getElementById('saveNotice');
+  if(!box) return;
+  box.textContent = message;
+  box.style.display = 'block';
+  setTimeout(()=> box.style.display='none', 5000);
+}
+
+function getCurrentWebsiteData(){
+  try{
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if(saved) return JSON.parse(saved);
+  }catch(e){}
+  return JSON.parse(JSON.stringify(defaults));
+}
+
+function makeStandaloneUpdatedHtml(){
+  const data = getCurrentWebsiteData();
+  let source = '<!doctype html>\n' + document.documentElement.outerHTML;
+
+  // Remove transient browser-added states and toolbar notice text.
+  source = source.replace(/<div class="notice" id="saveNotice"[^>]*>.*?<\/div>/s,
+                          '<div class="notice" id="saveNotice"></div>');
+
+  // Replace defaults object with current saved data.
+  const replacement = 'const defaults = ' + JSON.stringify(data, null, 2) + ';';
+  source = source.replace(/const defaults\s*=\s*\{[\s\S]*?\n\};/, replacement);
+
+  // Remove current localStorage values on first load of exported file,
+  // so the newly embedded defaults appear immediately.
+  source = source.replace(
+    "document.documentElement.classList.add('js-ready');",
+    "document.documentElement.classList.add('js-ready');\n" +
+    "if(!sessionStorage.getItem('ngocExportLoaded')){" +
+    "localStorage.removeItem(STORAGE_KEY);" +
+    "sessionStorage.setItem('ngocExportLoaded','1');}"
+  );
+
+  return source;
+}
+
+document.getElementById('downloadUpdatedHtml')?.addEventListener('click', ()=>{
+  const source = makeStandaloneUpdatedHtml();
+  const blob = new Blob([source], {type:'text/html;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'sharing.html';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+  showNotice('Downloaded updated sharing.html. Replace the old file, then Commit and Push.');
+});
+
+document.getElementById('resetBrowserData')?.addEventListener('click', ()=>{
+  if(confirm('Reset all locally added or edited items on this browser?')){
+    localStorage.removeItem(STORAGE_KEY);
+    location.reload();
+  }
+});
 
 </script>
 </body>

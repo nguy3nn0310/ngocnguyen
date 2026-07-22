@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://nguy3nn0310.github.io/ngocporfolio/sitemap.xml

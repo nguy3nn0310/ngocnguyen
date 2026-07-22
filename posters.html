@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Poster Gallery | Ngoc Nguyen</title>
+  <meta name="description" content="Poster gallery for Ngoc Nguyen's guides, recipes, services, and community resources.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+  <a class="brand" href="index.html"><span class="logo">NN</span><span>NGOC NGUYEN</span></a>
+  <button class="menu-btn" type="button" aria-label="Open navigation" aria-expanded="false">☰</button>
+  <nav class="site-nav">
+    <a href="index.html">Resume</a>
+    <a href="sharing.html">Trusted Resources</a>
+    <a href="3-days.html">3-Day Guides</a>
+    <a href="family-recipes.html">Family Recipes</a>
+    <a class="active" href="posters.html">Posters</a>
+    <a href="index.html#contact">Contact</a>
+  </nav>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="section-inner">
+      <span class="badge">EASY TO UPDATE</span>
+      <h1>Poster Gallery</h1>
+      <p class="lead">Add a poster image to the posters folder and add one entry in <code>data/posters.js</code>. The website will display it automatically.</p>
+      <div class="edit-note">
+        <strong>Poster folder:</strong> <code>assets/posters/</code><br>
+        <strong>Poster list:</strong> <code>data/posters.js</code>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-head">
+        <span class="smallcaps">Gallery</span>
+        <h2>Latest posters</h2>
+      </div>
+      <div id="postersGrid" class="poster-grid"></div>
+      <p id="posterEmpty" class="empty-state" hidden>No published posters yet.</p>
+    </div>
+  </section>
+</main>
+
+<footer>© <span data-year></span> Ngoc Tran Nhut Nguyen · Poster Gallery</footer>
+<script src="data/posters.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

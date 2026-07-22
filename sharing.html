@@ -1,560 +1,240 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Ngoc Nguyen | Sharing</title>
-<meta name="description" content="Helpful local places, restaurants, videos, links, and Pass It On items.">
-
-<style>
-:root{
-  --frost:#e8f3ef;--baby:#e7f1fb;--cream:#fbfaf6;--brown:#55423c;
-  --dark:#2f302f;--green:#3b7a6c;--line:#d8dedb;--white:#fff;--gold:#c58a25;
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--cream);color:var(--dark);line-height:1.55}
-a{text-decoration:none;color:inherit}
-button,input,textarea{font:inherit}
-.container{width:min(1180px,calc(100% - 34px));margin:auto}
-header{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.97);border-bottom:1px solid var(--line)}
-.nav{min-height:72px;display:flex;align-items:center;gap:18px}
-.brand{font-size:20px;font-weight:900;letter-spacing:.12em;color:var(--brown);margin-right:auto}
-.menu{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.navlink{padding:9px 14px;border-radius:999px;font-weight:800;color:var(--brown)}
-.navlink:hover,.navlink.active{background:var(--baby)}
-.hero{background:linear-gradient(135deg,var(--frost),var(--baby));padding:66px 0}
-.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:30px;align-items:center}
-h1{font-size:clamp(46px,7vw,78px);line-height:1;margin:0;color:var(--brown)}
-h2{font-size:clamp(30px,4vw,48px);margin:0 0 18px;color:var(--brown)}
-h3,h4{color:var(--brown)}
-.eyebrow{text-transform:uppercase;letter-spacing:.17em;font-weight:900;color:var(--brown)}
-.lead{font-size:18px;color:#655c57;max-width:760px}
-.card{background:#fff;border:1px solid var(--line);border-radius:26px;padding:25px;box-shadow:0 8px 28px rgba(70,70,70,.05)}
-section{padding:58px 0}
-.section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin-bottom:22px}
-.section-head p{margin:0;color:#746a64}
-.grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;align-items:stretch}
-.service-card,.mini-card,.item-card{background:#fff;border:1px solid var(--line);border-radius:24px;overflow:hidden;display:flex;flex-direction:column;min-height:100%}
-.map-strip{height:82px;background:
-linear-gradient(135deg,rgba(232,243,239,.95),rgba(231,241,251,.95)),
-repeating-linear-gradient(45deg,#d7dedb 0 2px,transparent 2px 18px);
-border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:#6d746f;font-size:13px;font-weight:800}
-.service-body,.mini-body,.item-body{padding:22px;display:flex;flex-direction:column;flex:1}
-.kicker{text-transform:uppercase;letter-spacing:.15em;font-weight:900;font-size:14px;margin-bottom:4px}
-.service-card h3,.mini-card h3,.item-card h3{font-size:29px;line-height:1.1;margin:0 0 10px}
-.address,.muted{color:#716761}
-.tags{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}
-.tag{background:var(--baby);padding:7px 11px;border-radius:999px;font-size:13px;font-weight:900}
-.desc{font-size:16px;margin:8px 0}
-.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:auto;padding-top:18px}
-.btn{border:1.5px solid var(--brown);background:#fff;color:var(--brown);padding:10px 15px;border-radius:999px;font-weight:900;cursor:pointer}
-.btn:hover{background:var(--baby)}
-.btn.primary{background:var(--brown);color:#fff}
-.btn.danger{border-color:#9c4d4d;color:#9c4d4d}
-.btn.small{padding:7px 11px;font-size:13px}
-.community-grid,.content-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
-.community-card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:22px}
-.resource-strip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:24px}
-.resource-card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:22px;display:flex;gap:14px;align-items:flex-start}
-.icon{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;flex:0 0 48px;background:var(--frost);font-size:23px}
-.resource-card:nth-child(2) .icon{background:var(--baby)}
-.resource-card:nth-child(3) .icon{background:#f7ead2}
-.resource-card h3{margin:0 0 4px}
-.resource-card p{margin:0;color:#746a64}
-.resource-card a{display:inline-block;margin-top:8px;color:var(--green);font-weight:900}
-.panel{background:#fff;border:1px solid var(--line);border-radius:24px;padding:24px}
-.list-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:18px}
-.placeholder{border:2px dashed #cbd3d0;background:#fcfdfc}
-.disclaimer{margin-top:24px;padding:16px 18px;border-radius:18px;background:var(--baby);font-size:14px}
-footer{background:var(--brown);color:#fff;text-align:center;padding:28px}
-
-/* Modal */
-.modal-backdrop{position:fixed;inset:0;background:rgba(35,31,29,.58);display:none;align-items:center;justify-content:center;padding:20px;z-index:100}
-.modal-backdrop.open{display:flex}
-.modal{width:min(640px,100%);max-height:90vh;overflow:auto;background:#fff;border-radius:28px;padding:28px;box-shadow:0 28px 80px rgba(0,0,0,.25)}
-.modal h2{font-size:clamp(34px,5vw,54px);line-height:1.05;margin-bottom:22px}
-.field{margin-bottom:16px}
-.field label{display:block;font-weight:900;margin-bottom:7px}
-.field input,.field textarea{width:100%;border:1px solid var(--line);border-radius:14px;padding:12px 14px;background:#fff}
-.field textarea{min-height:105px;resize:vertical}
-.modal-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:20px}
-.status-note{font-size:13px;color:#746a64;margin-top:12px}
-
-@media(max-width:900px){
-  .hero-grid,.grid-3,.resource-strip,.list-grid{grid-template-columns:1fr}
-  .community-grid,.content-grid{grid-template-columns:1fr}
-  .nav{align-items:flex-start;padding:14px 0}
-  .menu{justify-content:flex-end}
-}
-
-/* Shared utility classes */
-.mt-14{margin-top:14px}
-
-
-.admin-toolbar{
-  position:sticky; top:72px; z-index:15;
-  display:flex; gap:10px; flex-wrap:wrap; align-items:center;
-  margin:14px auto; padding:12px 16px;
-  max-width:1180px; background:#fffaf6;
-  border:1px solid #d8d0cb; border-radius:16px;
-  box-shadow:0 8px 24px rgba(47,48,47,.08);
-}
-.admin-toolbar strong{margin-right:auto}
-.admin-toolbar button{
-  border:0; border-radius:999px; padding:10px 14px;
-  font-weight:700; cursor:pointer;
-}
-.admin-toolbar .primary{background:#4a2f2f;color:white}
-.admin-toolbar .secondary{background:#e8f3ef;color:#2f302f}
-.notice{
-  max-width:1180px; margin:8px auto 16px; padding:10px 14px;
-  border-radius:12px; background:#edf7f3; color:#2f5f4f;
-  display:none;
-}
-
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Trusted Resources | Ngoc Nguyen</title>
+  <meta name="description" content="A growing directory of places, services, community resources, and helpful information personally trusted or found useful by Ngoc Nguyen.">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header>
-  <div class="container nav">
-    <a href="index.html" class="brand">NGOC NGUYEN</a>
-    <nav class="menu">
-      <a class="navlink" href="index.html">Resume</a>
-      <a class="navlink active" href="sharing.html">Local Guide</a>
-      <a class="navlink" href="3-days.html">3 Days</a>
-    </nav>
-  </div>
+<header class="site-header">
+  <a class="brand" href="index.html"><span class="logo">NN</span><span>NGOC NGUYEN</span></a>
+  <button class="menu-btn" type="button" aria-label="Open navigation" aria-expanded="false">☰</button>
+  <nav class="site-nav">
+    <a href="index.html">Resume</a>
+    <a class="active" href="sharing.html">Trusted Resources</a>
+    <a href="3-days.html">3-Day Guides</a>
+    <a href="index.html#contact">Contact</a>
+  </nav>
 </header>
-<div class="admin-toolbar">
-  <strong>Website Editor</strong>
-  <button class="primary" id="downloadUpdatedHtml">Download Updated sharing.html</button>
-  <button class="secondary" id="resetBrowserData">Reset Browser Data</button>
-</div>
-<div class="notice" id="saveNotice"></div>
-
 
 <main>
-<section class="hero">
-  <div class="container hero-grid">
-    <div>
-      <div class="eyebrow">Helpful Places & Resources</div>
-      <h1>Local Guide</h1>
-      <p class="lead">I share places, services, restaurants, community resources, helpful videos, and useful links I personally know around Central Texas.</p>
-    </div>
-    <div class="card">
-      <h3>My Sharing Promise</h3>
-      <p>Real experiences, not ads.</p>
-      <p>Places and services I know or trust.</p>
-      <p>Updated whenever I find something useful.</p>
-      <p>Always confirm details and use your own judgment.</p>
-    </div>
-  </div>
-</section>
+  <section class="hero resource-hero">
+    <div class="section-inner">
+      <span class="badge">PERSONAL RECOMMENDATIONS</span>
+      <h1>Trusted Resources</h1>
+      <p class="lead">A growing directory of places, services, and community resources that I personally trust or have found useful.</p>
+      <div class="trust-note"><strong>My sharing promise:</strong> These are personal recommendations, not paid advertisements. Please confirm current hours, pricing, availability, and service details directly.</div>
 
-<section>
-  <div class="container">
-    <div class="section-head">
-      <div><div class="eyebrow">Local Places</div><h2>Places & Services</h2></div>
+      <div class="search-panel">
+        <label class="sr-only" for="sharingSearch">Search trusted resources</label>
+        <input id="sharingSearch" class="search" type="search" placeholder="Search by name, category, or keyword...">
+        <div class="filters" aria-label="Resource filters">
+          <button class="filter active" data-filter="all" type="button">All</button>
+          <button class="filter" data-filter="auto-repair" type="button">Auto Repair</button>
+          <button class="filter" data-filter="car-rental" type="button">Car Rental</button>
+          <button class="filter" data-filter="sr22" type="button">SR-22</button>
+          <button class="filter" data-filter="homes" type="button">Homes & Offices</button>
+          <button class="filter" data-filter="food" type="button">Food & Coffee</button>
+          <button class="filter" data-filter="beauty" type="button">Hair & Beauty</button>
+          <button class="filter" data-filter="community" type="button">Community</button>
+          <button class="filter" data-filter="activities" type="button">Activities</button>
+          <button class="filter" data-filter="resources" type="button">Helpful Resources</button>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <div id="places-grid" class="grid-3"></div>
-  </div>
-</section>
+  <section class="section">
+    <div class="section-inner">
+      <div class="category-grid" aria-label="Browse categories">
+        <button class="category-card" data-jump-filter="auto-repair"><span>🔧</span><strong>Auto Repair</strong></button>
+        <button class="category-card" data-jump-filter="car-rental"><span>🚘</span><strong>Car Rental</strong></button>
+        <button class="category-card" data-jump-filter="sr22"><span>🛡️</span><strong>SR-22 Insurance</strong></button>
+        <button class="category-card" data-jump-filter="homes"><span>🏡</span><strong>Homes & Office Rentals</strong></button>
+        <button class="category-card" data-jump-filter="food"><span>🍜</span><strong>Restaurants & Coffee</strong></button>
+        <button class="category-card" data-jump-filter="beauty"><span>✂️</span><strong>Hair & Beauty</strong></button>
+        <button class="category-card" data-jump-filter="community"><span>🙏</span><strong>Temples & Churches</strong></button>
+        <button class="category-card" data-jump-filter="activities"><span>🎯</span><strong>Activities</strong></button>
+        <button class="category-card" data-jump-filter="resources"><span>🔗</span><strong>Videos, Websites & Pass It On</strong></button>
+      </div>
 
-<section id="restaurants">
-  <div class="container panel">
-    <div class="section-head">
-      <div><div class="eyebrow">Food</div><h2>Restaurants</h2></div>
-      <button class="btn primary" onclick="openEditor('restaurant')">Add Restaurant</button>
+      <div class="directory" id="resourceDirectory">
+        <article class="listing" data-category="auto-repair" data-search="luu auto trusted affordable repair mechanic austin">
+          <div class="listing-media">🔧</div>
+          <div class="listing-body">
+            <span class="tag">Auto Repair</span>
+            <h3>Luu Auto</h3>
+            <p>A local auto repair shop I trust for dependable service and reasonable pricing.</p>
+            <div class="why"><strong>Why I recommend it:</strong> Trusted and affordable.</div>
+            <div class="details"><span>📍 Austin, Texas</span></div>
+            <div class="actions"><a class="btn primary" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Luu+Auto+Lamar+Austin+TX">Open Map</a></div>
+          </div>
+        </article>
+
+        <article class="listing placeholder" data-category="auto-repair" data-search="future auto repair shop">
+          <div class="listing-media">＋</div>
+          <div class="listing-body">
+            <span class="tag">Auto Repair</span>
+            <h3>More Repair Shops</h3>
+            <p>Additional trusted auto repair businesses can be added here later.</p>
+          </div>
+        </article>
+
+        <article class="listing" data-category="car-rental" data-search="xeauto car rental 2301 west parmer lane austin">
+          <div class="listing-media">🚘</div>
+          <div class="listing-body">
+            <span class="tag">Car Rental</span>
+            <h3>XeAuto</h3>
+            <p>Car rental service at the Parmer Lane location.</p>
+            <div class="details"><span>📍 2301 W Parmer Ln, Austin, TX</span></div>
+            <div class="actions"><a class="btn primary" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=2301+W+Parmer+Ln+Austin+TX">Open Map</a></div>
+          </div>
+        </article>
+
+        <article class="listing" data-category="sr22" data-search="speedy sr22 insurance texas filing">
+          <div class="listing-media">🛡️</div>
+          <div class="listing-body">
+            <span class="tag">SR-22 Insurance</span>
+            <h3>Speedy SR-22</h3>
+            <p>A separate resource for SR-22 insurance assistance. This is not part of XeAuto.</p>
+            <div class="why"><strong>Category note:</strong> SR-22 insurance is listed separately from car rental.</div>
+          </div>
+        </article>
+
+        <article class="listing" data-category="homes" data-search="rexpro realty rentals homes office studio duplex fourplex austin pflugerville round rock">
+          <div class="listing-media">🏡</div>
+          <div class="listing-body">
+            <span class="tag">Homes & Office Rentals</span>
+            <h3>RexPro Realty</h3>
+            <p>One rental resource for studios, duplexes, fourplexes, homes, and selected office spaces in the Austin area.</p>
+            <div class="why"><strong>Why I share it:</strong> A property resource I know through my work.</div>
+          </div>
+        </article>
+
+        <article class="listing placeholder" data-category="homes" data-search="other property companies private owners office space">
+          <div class="listing-media">＋</div>
+          <div class="listing-body">
+            <span class="tag">Homes & Office Rentals</span>
+            <h3>More Rental Options</h3>
+            <p>Other property companies, private owners, and office-space listings can be added later.</p>
+          </div>
+        </article>
+
+        <article class="listing" data-category="food" data-search="carnaless vegetarian mexican food truck parmer">
+          <div class="listing-media">🌮</div>
+          <div class="listing-body">
+            <span class="tag">Restaurant · Vegetarian Mexican</span>
+            <h3>Carnaless</h3>
+            <p>A vegetarian Mexican food truck near the Parmer Lane location.</p>
+            <div class="why"><strong>Why I recommend it:</strong> A useful vegetarian option.</div>
+          </div>
+        </article>
+
+        <article class="listing" data-category="food" data-search="bodhi viet vegan vegetarian vietnamese food">
+          <div class="listing-media">🍜</div>
+          <div class="listing-body">
+            <span class="tag">Restaurant · Vegetarian Vietnamese</span>
+            <h3>Bodhi Viet Vegan</h3>
+            <p>Vietnamese vegetarian food and familiar comfort dishes.</p>
+            <div class="why"><strong>Why I recommend it:</strong> A Vietnamese vegetarian choice.</div>
+          </div>
+        </article>
+
+        <article class="listing placeholder" data-category="food" data-search="coffee shop add later">
+          <div class="listing-media">☕</div>
+          <div class="listing-body">
+            <span class="tag">Coffee</span>
+            <h3>Coffee Shops</h3>
+            <p>Trusted coffee shops can be added here as new recommendations become available.</p>
+          </div>
+        </article>
+
+        <article class="listing" data-category="beauty" data-search="angle hair salon appointment older style">
+          <div class="listing-media">✂️</div>
+          <div class="listing-body">
+            <span class="tag">Hair & Beauty</span>
+            <h3>Angle Hair</h3>
+            <p>A hair salon recommendation. Appointment availability should be confirmed directly.</p>
+            <div class="why"><strong>Helpful note:</strong> Appointment only.</div>
+          </div>
+        </article>
+
+        <article class="listing" data-category="community" data-search="chua truc lam temple hutto vietnamese classes children">
+          <div class="listing-media">🙏</div>
+          <div class="listing-body">
+            <span class="tag">Temple · Hutto</span>
+            <h3>Chùa Trúc Lâm</h3>
+            <p>A Vietnamese Buddhist temple and community resource in Hutto.</p>
+            <div class="why"><strong>Helpful for families:</strong> Ask directly about Vietnamese classes and community programs.</div>
+            <div class="actions"><a class="btn primary" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Chua+Truc+Lam+Hutto+TX">Open Map</a></div>
+          </div>
+        </article>
+
+        <article class="listing" data-category="community" data-search="chua linh son temple duval austin vietnamese classes children">
+          <div class="listing-media">🙏</div>
+          <div class="listing-body">
+            <span class="tag">Temple · Duval</span>
+            <h3>Chùa Linh Sơn</h3>
+            <p>A Vietnamese Buddhist temple and community resource near Duval Road.</p>
+            <div class="why"><strong>Helpful for families:</strong> Ask directly about Vietnamese classes and community programs.</div>
+            <div class="actions"><a class="btn primary" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Chua+Linh+Son+Duval+Austin+TX">Open Map</a></div>
+          </div>
+        </article>
+
+        <article class="listing placeholder" data-category="community" data-search="churches temples community add later">
+          <div class="listing-media">＋</div>
+          <div class="listing-body">
+            <span class="tag">Community</span>
+            <h3>More Temples & Churches</h3>
+            <p>Additional trusted temples, churches, and family resources can be added later.</p>
+          </div>
+        </article>
+
+        <article class="listing placeholder" data-category="activities" data-search="activities family local recreation add later">
+          <div class="listing-media">🎯</div>
+          <div class="listing-body">
+            <span class="tag">Activities</span>
+            <h3>Local Activities</h3>
+            <p>Family-friendly activities, sports, and local experiences can be added here.</p>
+          </div>
+        </article>
+
+        <article class="listing" data-category="resources" data-search="helpful videos tutorials learning">
+          <div class="listing-media">🎥</div>
+          <div class="listing-body">
+            <span class="tag">Helpful Videos</span>
+            <h3>Video Resources</h3>
+            <p>Helpful videos and tutorials can be added through the website data file later.</p>
+          </div>
+        </article>
+
+        <article class="listing" data-category="resources" data-search="helpful websites links articles tools guides">
+          <div class="listing-media">🔗</div>
+          <div class="listing-body">
+            <span class="tag">Helpful Websites</span>
+            <h3>Articles, Tools & Websites</h3>
+            <p>A place for useful articles, tools, guides, and websites—not map links.</p>
+          </div>
+        </article>
+
+        <article class="listing" data-category="resources" data-search="pass it on give donate sell used items">
+          <div class="listing-media">🎁</div>
+          <div class="listing-body">
+            <span class="tag">Pass It On</span>
+            <h3>Give, Donate, or Sell</h3>
+            <p>Items can later include a photo, condition, price, pickup area, and contact button.</p>
+          </div>
+        </article>
+      </div>
+
+      <p class="empty-state" id="emptyState" hidden>No matching resources were found.</p>
     </div>
-    <div id="restaurant-list" class="list-grid"></div>
-  </div>
-</section>
-
-<section>
-  <div class="container">
-    <div class="eyebrow">Vietnamese Community</div>
-    <h2>Vietnamese Language & Culture for Children</h2>
-    <p class="muted">These temples help Vietnamese families stay connected with the community, language, and culture. Please contact each temple directly for current schedules and registration details.</p>
-    <div class="community-grid">
-      <article class="community-card">
-        <h3>Chùa Trúc Lâm</h3>
-        <p>1455 County Road 137<br>Hutto, TX 78634</p>
-        <p>Vietnamese Buddhist temple with community activities and Vietnamese language and cultural opportunities for children.</p>
-        <a class="btn small" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Chua+Truc+Lam+Hutto+TX">Open Map</a>
-      </article>
-      <article class="community-card">
-        <h3>Chùa Linh Sơn</h3>
-        <p>4604 Duval Rd<br>Austin, TX 78727</p>
-        <p>Vietnamese Buddhist temple with Vietnamese language and cultural programs for children.</p>
-        <a class="btn small" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Chua+Linh+Son+4604+Duval+Rd+Austin+TX">Open Map</a>
-      </article>
-    </div>
-
-    <div class="resource-strip">
-      <article class="resource-card"><div class="icon">▶</div><div><h3>Helpful Videos</h3><p>Videos that helped me and might help you too.</p><a href="#videos">View videos →</a></div></article>
-      <article class="resource-card"><div class="icon">↗</div><div><h3>Helpful Links</h3><p>Useful articles, websites, forms, and resources.</p><a href="#links">View links →</a></div></article>
-      <article class="resource-card"><div class="icon">◇</div><div><h3>Pass It On</h3><p>Items to give away, donate, or sell.</p><a href="#passiton">View items →</a></div></article>
-    </div>
-  </div>
-</section>
-
-<section id="videos">
-  <div class="container panel">
-    <div class="section-head">
-      <div><div class="eyebrow">Watch & Learn</div><h2>Helpful Videos</h2></div>
-      <button class="btn primary" onclick="openEditor('video')">Add Video</button>
-    </div>
-    <div id="video-list" class="list-grid"></div>
-  </div>
-</section>
-
-<section id="links">
-  <div class="container panel">
-    <div class="section-head">
-      <div><div class="eyebrow">Useful Resources</div><h2>Helpful Links</h2></div>
-      <button class="btn primary" onclick="openEditor('link')">Add Link</button>
-    </div>
-    <div id="link-list" class="list-grid"></div>
-  </div>
-</section>
-
-<section id="passiton">
-  <div class="container panel">
-    <div class="section-head">
-      <div><div class="eyebrow">Give · Donate · Sell</div><h2>Pass It On</h2></div>
-      <button class="btn primary" onclick="openEditor('item')">Add Item</button>
-    </div>
-    <p class="muted">Items I no longer need but may still be useful to someone else.</p>
-    <div id="item-list" class="list-grid"></div>
-  </div>
-</section>
-
-<div class="container"><div class="disclaimer">These are personal recommendations based on my own experience. Services, pricing, schedules, and availability may change. Please confirm details directly and use your own judgment. Information you add on this page is saved in this browser on this computer.</div></div>
+  </section>
 </main>
 
-<footer>© 2026 Ngoc Nguyen · Thanks for visiting.</footer>
-
-<div id="modal-backdrop" class="modal-backdrop" onclick="backdropClose(event)">
-  <div class="modal" role="dialog" aria-modal="true">
-    <h2 id="modal-title">Add / Edit</h2>
-    <form id="editor-form">
-      <div id="form-fields"></div>
-      <div class="modal-actions">
-        <button type="button" class="btn" onclick="closeEditor()">Cancel</button>
-        <button type="submit" class="btn primary">Save</button>
-      </div>
-      <div class="status-note">Saved entries stay on this browser. They will not automatically appear on another device unless the website is later connected to an online database.</div>
-    </form>
-  </div>
-</div>
-
-<script>
-'use strict';
-
-window.NgocWebsite = Object.freeze({
-  name: 'Ngoc Nguyen Website',
-  version: '3.1-standard',
-  githubPagesReady: true
-});
-
-document.documentElement.classList.add('js-ready');
-
-const STORAGE_KEY = 'ngocLocalGuideDataV3';
-const defaults = {
-  autos: [
-    {name:'Luu Auto', address:'8225 N Lamar Blvd, Austin, TX', description:'Local mechanic for maintenance, diagnostics, inspections, and general auto repairs.', maps:'https://www.google.com/maps/search/?api=1&query=Luu+Auto+8225+N+Lamar+Blvd+Austin+TX', website:'', phone:'', photo:''}
-  ],
-  realtors: [
-    {name:'RexPro Realty LLC', address:'302 E Rundberg Ln, Austin, TX', description:'Studios, duplexes, fourplexes, and other rental homes in Austin, Round Rock, and Pflugerville. Contact RexPro Realty for current availability.', maps:'https://www.google.com/maps/search/?api=1&query=RexPro+Realty+302+E+Rundberg+Ln+Austin+TX', website:'', phone:'', photo:''}
-  ],
-  restaurants: [
-    {name:'Carnaless', address:'Behind 2301 W Parmer Ln, Austin, TX', description:'Vegetarian Mexican food.', link:''},
-    {name:'Bodhi Viet Vegan', address:'Behind 2301 W Parmer Ln, Austin, TX', description:'Vietnamese vegetarian food.', link:''}
-  ],
-  videos: [
-    {title:'Helpful Video 1', description:'Add a short note about why this video is useful.', link:''}
-  ],
-  links: [
-    {title:'Helpful Link 1', description:'Add a useful website, article, form, or local resource.', link:''}
-  ],
-  items: [
-    {name:'Item 1', price:'Free', status:'Available', location:'Round Rock, TX', description:'Add the item description here.', image:''}
-  ]
-};
-let data = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null') || defaults;
-let editing = {type:null,index:null};
-
-const schemas = {
-  auto: [
-    ['name','Shop name','text'],['address','Address','text'],['description','Description','textarea'],
-    ['maps','Google Maps link','url'],['website','Website','url'],['phone','Phone','text'],['photo','Photo URL or path (optional)','text']
-  ],
-  realtor: [
-    ['name','Realtor or company name','text'],['address','Address','text'],['description','Rental description','textarea'],
-    ['maps','Google Maps link','url'],['website','Website','url'],['phone','Phone or email','text'],['photo','Photo URL or path (optional)','text']
-  ],
-  restaurant: [
-    ['name','Restaurant name','text'],['address','Address','text'],
-    ['description','Description','textarea'],['link','Google Maps or website link','url']
-  ],
-  video: [
-    ['title','Video title','text'],['description','Description','textarea'],['link','YouTube link','url']
-  ],
-  link: [
-    ['title','Link title','text'],['description','Description','textarea'],['link','Website link','url']
-  ],
-  item: [
-    ['name','Item name','text'],['price','Price or Free','text'],['status','Status','text'],
-    ['location','Pickup location','text'],['description','Description','textarea'],['image','Image URL or path','text']
-  ]
-};
-const typeMap = {auto:'autos',realtor:'realtors',restaurant:'restaurants',video:'videos',link:'links',item:'items'};
-
-function esc(v=''){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));}
-function save(){localStorage.setItem(STORAGE_KEY,JSON.stringify(data));renderAll();}
-function safeLink(url){return /^https?:\/\//i.test(url||'') ? url : '#';}
-
-
-function renderPlaces(){
-  const grid=document.getElementById('places-grid');
-
-  const autoCards=data.autos.map((a,i)=>`
-    <article class="service-card">
-      <div class="map-strip">${a.photo?`<img src="${esc(a.photo)}" alt="${esc(a.name)}" style="width:100%;height:100%;object-fit:cover">`:`Map preview · ${esc(a.name)}`}</div>
-      <div class="service-body">
-        <div class="kicker">Auto Services</div>
-        <h3>${esc(a.name)}</h3>
-        <div class="address">${esc(a.address)}</div>
-        <p class="desc">${esc(a.description)}</p>
-        ${a.phone?`<p class="desc"><strong>Phone:</strong> ${esc(a.phone)}</p>`:''}
-        <div class="actions">
-          ${a.maps?`<a class="btn" target="_blank" href="${esc(safeLink(a.maps))}">Open in Google Maps</a>`:''}
-          ${a.website?`<a class="btn" target="_blank" href="${esc(safeLink(a.website))}">Website</a>`:''}
-          <button class="btn small" onclick="openEditor('auto',${i})">Edit</button>
-          ${i===0?`<button class="btn primary" onclick="openEditor('auto')">Add Auto Shop</button>`:`<button class="btn small danger" onclick="removeEntry('auto',${i})">Delete</button>`}
-        </div>
-      </div>
-    </article>`).join('');
-
-  const fixed2301=`
-    <article class="service-card">
-      <div class="map-strip">Map preview · 2301 W Parmer Ln</div>
-      <div class="service-body">
-        <div class="kicker">Local Services</div>
-        <h3>2301 W Parmer Ln</h3>
-        <div class="address">2301 W Parmer Ln<br>Austin, TX</div>
-        <div class="tags"><span class="tag">XeAuto</span><span class="tag">SR-22 Services</span><span class="tag">Angle Hair</span></div>
-        <p class="desc"><strong>XeAuto</strong> — vehicle rentals for Uber, Lyft, commuting, and everyday transportation.</p>
-        <p class="desc"><strong>SR-22 Services</strong> — available at the same location.</p>
-        <p class="desc"><strong>Angle Hair</strong> — traditional hairstyles, perms, coloring, and styling by appointment.</p>
-        <p class="desc"><strong>Tiếng Việt:</strong> Chuyên cắt tóc, uốn, nhuộm và tạo kiểu cho người Việt. Chỉ nhận khách theo lịch hẹn.</p>
-        <div class="actions">
-          <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=2301+W+Parmer+Ln+Austin+TX">Open in Google Maps</a>
-        </div>
-      </div>
-    </article>`;
-
-  const realtorCards=data.realtors.map((r,i)=>`
-    <article class="service-card">
-      <div class="map-strip">${r.photo?`<img src="${esc(r.photo)}" alt="${esc(r.name)}" style="width:100%;height:100%;object-fit:cover">`:`Map preview · ${esc(r.name)}`}</div>
-      <div class="service-body">
-        <div class="kicker">Rentals</div>
-        <h3>${esc(r.name)}</h3>
-        <div class="address">${esc(r.address)}</div>
-        <p class="desc">${esc(r.description)}</p>
-        ${r.phone?`<p class="desc"><strong>Contact:</strong> ${esc(r.phone)}</p>`:''}
-        <div class="actions">
-          ${r.maps?`<a class="btn" target="_blank" href="${esc(safeLink(r.maps))}">Open in Google Maps</a>`:''}
-          ${r.website?`<a class="btn" target="_blank" href="${esc(safeLink(r.website))}">Website</a>`:''}
-          <button class="btn small" onclick="openEditor('realtor',${i})">Edit</button>
-          ${i===0?`<button class="btn primary" onclick="openEditor('realtor')">Add Realtor</button>`:`<button class="btn small danger" onclick="removeEntry('realtor',${i})">Delete</button>`}
-        </div>
-      </div>
-    </article>`).join('');
-
-  grid.innerHTML=autoCards+fixed2301+realtorCards;
-}
-
-function renderRestaurants(){
-  const el=document.getElementById('restaurant-list');
-  el.innerHTML=data.restaurants.map((r,i)=>`
-    <article class="mini-card">
-      <div class="mini-body">
-        <div class="kicker">Restaurant</div>
-        <h3>${esc(r.name)}</h3>
-        <p class="address">${esc(r.address)}</p>
-        <p class="desc">${esc(r.description)}</p>
-        <div class="actions">
-          ${r.link?`<a class="btn small" target="_blank" href="${esc(safeLink(r.link))}">Open map or website</a>`:''}
-          <button class="btn small" onclick="openEditor('restaurant',${i})">Edit</button>
-          <button class="btn small danger" onclick="removeEntry('restaurant',${i})">Delete</button>
-        </div>
-      </div>
-    </article>`).join('') + `
-    <article class="mini-card placeholder"><div class="mini-body">
-      <div class="kicker">Restaurant</div><h3>Add Restaurant</h3>
-      <p class="muted">Type a restaurant name, address, description, and link.</p>
-      <div class="actions"><button class="btn" onclick="openEditor('restaurant')">Add Restaurant</button></div>
-    </div></article>`;
-}
-function renderVideos(){
-  const el=document.getElementById('video-list');
-  el.innerHTML=data.videos.map((v,i)=>`
-    <article class="mini-card"><div class="mini-body">
-      <div class="kicker">Helpful Video</div><h3>${esc(v.title)}</h3>
-      <p class="desc">${esc(v.description)}</p>
-      <div class="actions">
-        ${v.link?`<a class="btn small" target="_blank" href="${esc(safeLink(v.link))}">Watch Video</a>`:''}
-        <button class="btn small" onclick="openEditor('video',${i})">Edit</button>
-        <button class="btn small danger" onclick="removeEntry('video',${i})">Delete</button>
-      </div></div></article>`).join('') + `
-      <article class="mini-card placeholder"><div class="mini-body">
-      <div class="kicker">Helpful Video</div><h3>Add Video</h3>
-      <p class="muted">Add the title, reason it is useful, and YouTube link.</p>
-      <div class="actions"><button class="btn" onclick="openEditor('video')">Add Video</button></div>
-      </div></article>`;
-}
-function renderLinks(){
-  const el=document.getElementById('link-list');
-  el.innerHTML=data.links.map((v,i)=>`
-    <article class="mini-card"><div class="mini-body">
-      <div class="kicker">Helpful Link</div><h3>${esc(v.title)}</h3>
-      <p class="desc">${esc(v.description)}</p>
-      <div class="actions">
-        ${v.link?`<a class="btn small" target="_blank" href="${esc(safeLink(v.link))}">Open Link</a>`:''}
-        <button class="btn small" onclick="openEditor('link',${i})">Edit</button>
-        <button class="btn small danger" onclick="removeEntry('link',${i})">Delete</button>
-      </div></div></article>`).join('') + `
-      <article class="mini-card placeholder"><div class="mini-body">
-      <div class="kicker">Helpful Link</div><h3>Add Link</h3>
-      <p class="muted">Add a useful article, website, form, or resource.</p>
-      <div class="actions"><button class="btn" onclick="openEditor('link')">Add Link</button></div>
-      </div></article>`;
-}
-function renderItems(){
-  const el=document.getElementById('item-list');
-  el.innerHTML=data.items.map((v,i)=>`
-    <article class="item-card"><div class="item-body">
-      ${v.image?`<img src="${esc(v.image)}" alt="${esc(v.name)}" style="width:100%;height:170px;object-fit:cover;border-radius:16px;margin-bottom:14px">`:'<div class="map-strip" style="height:120px;border-radius:16px;margin-bottom:14px">Item photo</div>'}
-      <div class="kicker">Pass It On</div><h3>${esc(v.name)}</h3>
-      <p><strong>${esc(v.price)}</strong> · ${esc(v.status)}</p>
-      <p class="address">${esc(v.location)}</p>
-      <p class="desc">${esc(v.description)}</p>
-      <div class="actions">
-        <a class="btn small" href="mailto:nguy3nn0310@gmail.com?subject=${encodeURIComponent('Pass It On: '+v.name)}">Contact Ngoc</a>
-        <button class="btn small" onclick="openEditor('item',${i})">Edit</button>
-        <button class="btn small danger" onclick="removeEntry('item',${i})">Delete</button>
-      </div></div></article>`).join('') + `
-      <article class="item-card placeholder"><div class="item-body">
-      <div class="kicker">Pass It On</div><h3>Add Item</h3>
-      <p class="muted">Add an item name, price or free, status, pickup location, description, and image.</p>
-      <div class="actions"><button class="btn" onclick="openEditor('item')">Add Item</button></div>
-      </div></article>`;
-}
-function renderAll(){renderPlaces();renderRestaurants();renderVideos();renderLinks();renderItems();}
-
-function openEditor(type,index=null){
-  editing={type,index};
-  const collection=data[typeMap[type]];
-  const current=index===null?{}:collection[index];
-  document.getElementById('modal-title').textContent=(index===null?'Add ':'Add / Edit ')+
-    ({auto:'Auto Shop',realtor:'Realtor / Rental Company',restaurant:'Restaurant',video:'Helpful Video',link:'Helpful Link',item:'Pass It On Item'}[type]);
-  document.getElementById('form-fields').innerHTML=schemas[type].map(([key,label,kind])=>`
-    <div class="field"><label for="f-${key}">${label}</label>
-    ${kind==='textarea'
-      ? `<textarea id="f-${key}" name="${key}">${esc(current[key]||'')}</textarea>`
-      : `<input id="f-${key}" name="${key}" type="${kind}" value="${esc(current[key]||'')}">`}
-    </div>`).join('');
-  document.getElementById('modal-backdrop').classList.add('open');
-  document.body.style.overflow='hidden';
-}
-function closeEditor(){
-  document.getElementById('modal-backdrop').classList.remove('open');
-  document.body.style.overflow='';
-}
-function backdropClose(e){if(e.target.id==='modal-backdrop')closeEditor();}
-document.getElementById('editor-form').addEventListener('submit',e=>{
-  e.preventDefault();
-  const obj={};
-  new FormData(e.target).forEach((v,k)=>obj[k]=v.trim());
-  const collection=data[typeMap[editing.type]];
-  if(editing.index===null) collection.push(obj); else collection[editing.index]=obj;
-  save();closeEditor();
-});
-function removeEntry(type,index){
-  if(confirm('Delete this entry?')){
-    data[typeMap[type]].splice(index,1);save();
-  }
-}
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeEditor();});
-renderAll();
-
-
-// ===== PERMANENT UPDATE EXPORT =====
-function showNotice(message){
-  const box = document.getElementById('saveNotice');
-  if(!box) return;
-  box.textContent = message;
-  box.style.display = 'block';
-  setTimeout(()=> box.style.display='none', 5000);
-}
-
-function getCurrentWebsiteData(){
-  try{
-    const saved = localStorage.getItem(STORAGE_KEY);
-    if(saved) return JSON.parse(saved);
-  }catch(e){}
-  return JSON.parse(JSON.stringify(defaults));
-}
-
-function makeStandaloneUpdatedHtml(){
-  const data = getCurrentWebsiteData();
-  let source = '<!doctype html>\n' + document.documentElement.outerHTML;
-
-  // Remove transient browser-added states and toolbar notice text.
-  source = source.replace(/<div class="notice" id="saveNotice"[^>]*>.*?<\/div>/s,
-                          '<div class="notice" id="saveNotice"></div>');
-
-  // Replace defaults object with current saved data.
-  const replacement = 'const defaults = ' + JSON.stringify(data, null, 2) + ';';
-  source = source.replace(/const defaults\s*=\s*\{[\s\S]*?\n\};/, replacement);
-
-  // Remove current localStorage values on first load of exported file,
-  // so the newly embedded defaults appear immediately.
-  source = source.replace(
-    "document.documentElement.classList.add('js-ready');",
-    "document.documentElement.classList.add('js-ready');\n" +
-    "if(!sessionStorage.getItem('ngocExportLoaded')){" +
-    "localStorage.removeItem(STORAGE_KEY);" +
-    "sessionStorage.setItem('ngocExportLoaded','1');}"
-  );
-
-  return source;
-}
-
-document.getElementById('downloadUpdatedHtml')?.addEventListener('click', ()=>{
-  const source = makeStandaloneUpdatedHtml();
-  const blob = new Blob([source], {type:'text/html;charset=utf-8'});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'sharing.html';
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-  URL.revokeObjectURL(url);
-  showNotice('Downloaded updated sharing.html. Replace the old file, then Commit and Push.');
-});
-
-document.getElementById('resetBrowserData')?.addEventListener('click', ()=>{
-  if(confirm('Reset all locally added or edited items on this browser?')){
-    localStorage.removeItem(STORAGE_KEY);
-    location.reload();
-  }
-});
-
-</script>
+<footer>© <span data-year></span> Ngoc Tran Nhut Nguyen · Trusted Resources</footer>
+<script src="app.js"></script>
 </body>
 </html>

@@ -5,8 +5,209 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <title>Family Recipes | Ngoc's Family Recipes</title>
-<meta content="Ngoc's Family Recipes — family-style bilingual recipes made with love." name="description"/>
+<meta content="Ngoc's Family Recipes — premium bilingual family recipe PDFs made with love." name="description"/>
 <link href="style.css" rel="stylesheet"/>
+<style>
+    :root{
+      --wine:#720b18;
+      --wine-dark:#4f0710;
+      --gold:#c69735;
+      --cream:#fff8ec;
+      --ink:#392622;
+      --soft:#f3eadc;
+      --line:#e7d7bd;
+    }
+
+    body{background:#fffdf9;color:var(--ink)}
+    .recipe-wrap{width:min(1180px,calc(100% - 36px));margin:auto}
+
+    .recipe-hero{
+      padding:58px 20px 48px;
+      background:linear-gradient(135deg,#fffaf0,#efe2cb);
+      border-bottom:1px solid var(--line);
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:210px 1fr;
+      gap:34px;
+      align-items:center;
+    }
+
+    .brand-logo{
+      display:block;
+      width:100%;
+      border-radius:24px;
+      box-shadow:0 18px 55px rgba(79,7,16,.13);
+    }
+
+    .eyebrow{
+      display:inline-block;
+      padding:8px 13px;
+      border-radius:999px;
+      background:#fff;
+      color:var(--wine);
+      font-weight:900;
+      font-size:.78rem;
+      letter-spacing:.12em;
+    }
+
+    .recipe-hero h1{
+      margin:16px 0 10px;
+      font-family:Georgia,serif;
+      color:var(--wine);
+      font-size:clamp(3rem,7vw,5.6rem);
+      line-height:.95;
+    }
+
+    .recipe-hero .lead{
+      max-width:760px;
+      margin:0;
+      font-size:1.12rem;
+    }
+
+    .recipe-section{padding:58px 20px}
+    .recipe-section.alt{background:var(--cream)}
+
+    .release-card{
+      display:grid;
+      grid-template-columns:.9fr 1.1fr;
+      background:linear-gradient(145deg,var(--wine),var(--wine-dark));
+      color:#fff;
+      border-radius:28px;
+      overflow:hidden;
+      box-shadow:0 22px 60px rgba(79,7,16,.22);
+    }
+
+    .release-copy{padding:38px}
+    .release-label{
+      color:#ffe3a4;
+      font-size:.82rem;
+      font-weight:900;
+      letter-spacing:.12em;
+    }
+
+    .release-copy h2{
+      margin:12px 0 4px;
+      font-family:Georgia,serif;
+      font-size:clamp(2.4rem,5vw,4.5rem);
+      line-height:1;
+    }
+
+    .release-date{
+      margin:12px 0 20px;
+      font-size:1.08rem;
+      font-weight:800;
+    }
+
+    .release-price{
+      margin:18px 0 4px;
+      color:#ffe3a4;
+      font-size:2.6rem;
+      font-weight:900;
+    }
+
+    .release-note{max-width:560px;color:#f6e9e3}
+
+    .benefits{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:10px;
+      margin:22px 0;
+    }
+
+    .benefits span{
+      padding:11px 13px;
+      border:1px solid rgba(255,255,255,.22);
+      border-radius:12px;
+      background:rgba(255,255,255,.08);
+      font-weight:700;
+    }
+
+    .recipe-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+    .recipe-btn{
+      display:inline-block;
+      padding:13px 18px;
+      border-radius:12px;
+      text-decoration:none;
+      font-weight:900;
+      border:0;
+      cursor:pointer;
+    }
+
+    .recipe-btn.gold{background:var(--gold);color:#2d1c10}
+    .recipe-btn.light{background:#fff;color:var(--wine)}
+
+    .release-image{
+      display:block;
+      width:100%;
+      height:100%;
+      min-height:620px;
+      object-fit:cover;
+    }
+
+    .privacy-note{
+      margin-top:22px;
+      padding:17px 19px;
+      border:1px solid var(--line);
+      border-radius:16px;
+      background:#fff;
+    }
+
+    .recipe-section h2.section-title{
+      margin:0 0 10px;
+      color:var(--wine);
+      font-family:Georgia,serif;
+      font-size:clamp(2rem,4vw,3.1rem);
+    }
+
+    .section-lead{max-width:780px;margin:0 0 28px}
+
+    .coming-grid{
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:18px;
+    }
+
+    .coming-card{
+      padding:24px;
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:20px;
+      text-align:center;
+    }
+
+    .coming-card .emoji{display:block;font-size:2rem;margin-bottom:8px}
+    .coming-card h3{margin:0 0 6px;color:var(--wine)}
+    .coming-card p{margin:0;color:#705b53}
+
+    .brand-strip{
+      padding:28px;
+      border-radius:24px;
+      background:var(--wine);
+      color:#fff;
+      text-align:center;
+    }
+
+    .brand-strip strong{
+      display:block;
+      margin-bottom:5px;
+      font-family:Georgia,serif;
+      font-size:1.8rem;
+    }
+
+    @media(max-width:850px){
+      .hero-grid,.release-card{grid-template-columns:1fr}
+      .brand-logo{max-width:210px}
+      .release-image{min-height:0}
+      .coming-grid{grid-template-columns:1fr 1fr}
+    }
+
+    @media(max-width:560px){
+      .benefits,.coming-grid{grid-template-columns:1fr}
+      .release-copy{padding:26px}
+    }
+  </style>
 </head>
 <body>
 <header class="site-header">
@@ -17,84 +218,153 @@
 <a href="sharing.html">Trusted Resources</a>
 <a href="3-days.html">3-Day Guides</a>
 <a class="active" href="family-recipes.html">Family Recipes</a>
+<a href="posters.html">Posters</a>
 <a href="index.html#contact">Contact</a>
 </nav>
 </header>
 <main>
-<section class="hero recipe-hero">
-<div class="section-inner">
-<span class="badge">NGOC'S FAMILY RECIPES</span>
+<section class="recipe-hero">
+<div class="recipe-wrap hero-grid">
+<img alt="Ngoc's Family Recipes logo" class="brand-logo" data-image-base="assets/recipes/logo" src=""/>
+<div>
+<span class="eyebrow">NGOC'S FAMILY RECIPES</span>
 <h1>Made with love.</h1>
-<p class="lead">Premium bilingual recipe cards designed for home cooks.</p>
+<p class="lead">Premium bilingual recipe PDFs with clear instructions, practical cooking tips, and family-style flavor.</p>
+</div>
 </div>
 </section>
-<section class="section">
-<div class="section-inner">
-<div style="background:#6b0f1a;color:white;padding:24px;border-radius:16px;margin-bottom:30px;">
-<h2 style="margin-top:0;">🔥 Upcoming Recipe Release</h2>
-<p><strong>Coming on August 15, 2026</strong></p>
-<h3>BBQ Pork Ribs</h3>
-<p>Premium Recipe PDF</p>
-<p style="font-size:28px;font-weight:bold;">$4.99</p>
-<ul>
-<li>English + Vietnamese</li>
-<li>Printable PDF</li>
-<li>Step-by-step Instructions</li>
-</ul>
-<p><em>The complete recipe will be delivered after purchase.</em></p>
-<button style="padding:12px 20px;">Notify Me</button>
+<section class="recipe-section">
+<div class="recipe-wrap">
+<article class="release-card">
+<div class="release-copy">
+<div class="release-label" id="release-status">UPCOMING RECIPE RELEASE</div>
+<h2 id="release-name">BBQ Pork Ribs</h2>
+<p id="release-name-vi"><strong>Sườn Nướng BBQ</strong></p>
+<p class="release-date">
+            Coming on <span id="release-date">August 15, 2026</span>
+</p>
+<p class="release-note">
+            Tender, juicy, fall-off-the-bone ribs. The complete ingredient list and step-by-step recipe are provided only after purchase.
+          </p>
+<div class="benefits">
+<span>✓ English + Vietnamese</span>
+<span>✓ Printable PDF</span>
+<span>✓ Step-by-step guide</span>
+<span>✓ Grill, oven &amp; air fryer</span>
 </div>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center;">
-<div>
-<h2>Featured Recipe</h2>
-<p>BBQ Pork Ribs is the first premium recipe in the Ngoc's Family Recipes collection.</p>
-<p><strong>What you'll receive:</strong></p>
-<ul>
-<li>Printable PDF</li>
-<li>English &amp; Vietnamese</li>
-<li>Ingredient Guide</li>
-<li>Cooking Tips</li>
-<li>Premium Recipe Card</li>
-</ul>
-<p><strong>Important:</strong> The full ingredient list and cooking instructions are only available after purchase.</p>
-</div>
-<div>
-<img alt="BBQ Ribs Cover" src="assets/recipes/bbq-cover.jpg" style="width:100%;border-radius:16px;"/>
+<div class="release-price" id="release-price">$4.99</div>
+<div>One-time purchase</div>
+<div class="recipe-actions">
+<a class="recipe-btn gold" href="mailto:nguy3nn0310@gmail.com?subject=BBQ%20Pork%20Ribs%20Recipe%20Notification" id="notify-button">
+              Notify Me
+            </a>
+<a class="recipe-btn light" href="#more-recipes">More Recipes</a>
 </div>
 </div>
-<hr style="margin:50px 0;"/>
-<h2>Recipe Collection</h2>
-<div class="grid">
-<article class="card">
-<div class="card-top">🥩</div>
-<h3>BBQ Pork Ribs</h3>
-<p>Coming August 15, 2026</p>
-<strong>$4.99</strong>
+<img alt="BBQ Pork Ribs promotional image" class="release-image" data-image-base="assets/recipes/bbq-pork-ribs" src=""/>
 </article>
-<article class="card">
-<div class="card-top">🍜</div>
+<div class="privacy-note">
+<strong>What's Included</strong>
+<div style="margin-top:10px;display:grid;gap:7px;">
+<span>✓ Premium bilingual recipe PDF</span>
+<span>✓ Clear step-by-step instructions</span>
+<span>✓ English + Vietnamese</span>
+<span>✓ Practical cooking tips</span>
+<span>✓ Digital delivery after purchase</span>
+</div>
+</div>
+</div>
+</section>
+<section class="recipe-section alt" id="more-recipes">
+<div class="recipe-wrap">
+<h2 class="section-title">More Recipes Coming Soon</h2>
+<p class="section-lead">New recipe cards can be added here one at a time as they are completed.</p>
+<div class="coming-grid">
+<article class="coming-card">
+<span class="emoji">🍜</span>
 <h3>Vietnamese Favorites</h3>
 <p>Coming Soon</p>
 </article>
-<article class="card">
-<div class="card-top">🍗</div>
+<article class="coming-card">
+<span class="emoji">🍗</span>
 <h3>Chicken Recipes</h3>
 <p>Coming Soon</p>
 </article>
-<article class="card">
-<div class="card-top">🥣</div>
+<article class="coming-card">
+<span class="emoji">🥩</span>
+<h3>Marinated Meats</h3>
+<p>Coming Soon</p>
+</article>
+<article class="coming-card">
+<span class="emoji">🥣</span>
 <h3>Sauces &amp; Sides</h3>
 <p>Coming Soon</p>
 </article>
 </div>
-<div class="footer-card" style="margin-top:40px;">
-<h3>Ngoc's Family Recipes</h3>
-<p>Made with love · Premium PDF Recipe Collection</p>
 </div>
+</section>
+<section class="recipe-section">
+<div class="recipe-wrap">
+<div class="brand-strip">
+<strong>Ngoc's Family Recipes</strong>
+        Made with love · Premium bilingual family recipe PDFs
+      </div>
 </div>
 </section>
 </main>
 <footer>© <span data-year=""></span> Ngoc Tran Nhut Nguyen · Ngoc's Family Recipes</footer>
 <script src="app.js"></script>
-</body>
+<script>
+  /*
+  ===================================================
+  EASY UPDATE AREA — ONLY EDIT THESE 5 LINES LATER
+  ===================================================
+  */
+  const RECIPE_STATUS = "UPCOMING RECIPE RELEASE";
+  const RECIPE_DATE   = "August 15, 2026";
+  const RECIPE_NAME   = "BBQ Pork Ribs";
+  const RECIPE_PRICE  = "$4.99";
+  const BUTTON_TEXT   = "Notify Me";
+  /*
+  ===================================================
+  */
+
+  document.getElementById("release-status").textContent = RECIPE_STATUS;
+  document.getElementById("release-date").textContent = RECIPE_DATE;
+  document.getElementById("release-name").textContent = RECIPE_NAME;
+  document.getElementById("release-price").textContent = RECIPE_PRICE;
+  document.getElementById("notify-button").textContent = BUTTON_TEXT;
+</script>
+<script>
+  // Automatically try common image extensions.
+  (function () {
+    const extensions = [".jpeg", ".jpg", ".png", ".webp", ".JPEG", ".JPG", ".PNG", ".WEBP"];
+
+    function loadImageWithFallback(img) {
+      const base = img.dataset.imageBase;
+      if (!base) return;
+
+      let index = 0;
+
+      function tryNext() {
+        if (index >= extensions.length) {
+          img.alt = img.alt + " (image not found)";
+          img.removeAttribute("src");
+          return;
+        }
+
+        const candidate = base + extensions[index++];
+        img.onerror = tryNext;
+        img.onload = function () {
+          img.onerror = null;
+        };
+        img.src = candidate;
+      }
+
+      tryNext();
+    }
+
+    document.querySelectorAll("img[data-image-base]").forEach(loadImageWithFallback);
+  })();
+</script></body>
 </html>

@@ -1,0 +1,490 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Learn Technology | Ngoc Nguyen</title>
+<style>
+:root{
+  --bg:#f8fbfb;
+  --ink:#3f3a38;
+  --brown:#6d4c41;
+  --blue:#dff3f8;
+  --green:#e8f4ec;
+  --white:#ffffff;
+  --line:#d9e2e2;
+  --gold:#b98b3d;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  line-height:1.65;
+}
+a{text-decoration:none}
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:20;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:16px;
+  padding:14px 20px;
+  background:rgba(255,255,255,.96);
+  border-bottom:1px solid var(--line);
+}
+.brand{font-weight:800;color:var(--brown)}
+.topbar nav{display:flex;gap:14px;flex-wrap:wrap}
+.topbar nav a{color:var(--brown);font-weight:700}
+.hero{
+  padding:74px 20px 56px;
+  text-align:center;
+  background:linear-gradient(135deg,var(--blue),var(--green));
+}
+.hero h1{
+  margin:0 0 8px;
+  font-size:clamp(42px,8vw,72px);
+  color:var(--brown);
+}
+.tagline{
+  margin:0 0 28px;
+  font-size:clamp(20px,3vw,28px);
+  font-weight:800;
+  color:var(--gold);
+}
+.intro{
+  max-width:850px;
+  margin:0 auto 28px;
+  background:rgba(255,255,255,.72);
+  border:1px solid rgba(255,255,255,.9);
+  border-radius:20px;
+  padding:26px;
+  text-align:left;
+}
+.lang{
+  margin:0 0 18px;
+}
+.lang:last-child{margin-bottom:0}
+.lang strong{
+  display:block;
+  color:var(--brown);
+  margin-bottom:5px;
+}
+.btn{
+  display:inline-block;
+  border:0;
+  border-radius:12px;
+  padding:13px 20px;
+  font-weight:800;
+  cursor:pointer;
+  background:var(--brown);
+  color:white;
+}
+.btn.secondary{
+  background:white;
+  color:var(--brown);
+  border:1px solid var(--brown);
+}
+.wrap{
+  max-width:1120px;
+  margin:auto;
+  padding:42px 20px 70px;
+}
+.course-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+}
+.course-card,.lesson,.sidebar,.progress-card{
+  background:var(--white);
+  border:1px solid var(--line);
+  border-radius:18px;
+  box-shadow:0 10px 30px rgba(65,73,73,.06);
+}
+.course-card{padding:24px}
+.course-card h2{margin-top:0;color:var(--brown)}
+.muted{color:#6e7777}
+.course-layout{
+  display:grid;
+  grid-template-columns:280px 1fr;
+  gap:24px;
+  margin-top:42px;
+}
+.sidebar{
+  padding:18px;
+  align-self:start;
+  position:sticky;
+  top:78px;
+}
+.sidebar h3{margin:0 0 12px;color:var(--brown)}
+.lesson-list{
+  display:grid;
+  gap:8px;
+}
+.lesson-list button{
+  text-align:left;
+  padding:11px 12px;
+  border:1px solid transparent;
+  border-radius:10px;
+  background:#f7f9f9;
+  color:var(--ink);
+  cursor:pointer;
+}
+.lesson-list button.active{
+  background:var(--blue);
+  border-color:#b8dce5;
+  font-weight:800;
+}
+.progress-card{
+  padding:16px;
+  margin-bottom:18px;
+}
+.progress-track{
+  height:10px;
+  background:#edf1f1;
+  border-radius:999px;
+  overflow:hidden;
+}
+.progress-fill{
+  height:100%;
+  width:10%;
+  background:var(--gold);
+  transition:width .25s ease;
+}
+.lesson{
+  display:none;
+  padding:28px;
+}
+.lesson.active{display:block}
+.lesson h2{
+  margin-top:0;
+  color:var(--brown);
+  font-size:clamp(28px,4vw,40px);
+}
+.badge{
+  display:inline-block;
+  margin-bottom:14px;
+  padding:6px 10px;
+  border-radius:999px;
+  background:var(--green);
+  color:var(--brown);
+  font-weight:800;
+}
+.code{
+  background:#22272e;
+  color:#f4f7f7;
+  padding:18px;
+  border-radius:14px;
+  overflow:auto;
+  white-space:pre-wrap;
+  font-family:Consolas,Monaco,monospace;
+  font-size:14px;
+}
+.explain{
+  background:#f9fcfc;
+  border-left:5px solid #9dc8d1;
+  padding:16px;
+  border-radius:10px;
+  margin:18px 0;
+}
+.practice{
+  background:#fff8e7;
+  border-left:5px solid var(--gold);
+  padding:16px;
+  border-radius:10px;
+  margin:18px 0;
+}
+.preview{
+  border:1px dashed #9aa7a7;
+  border-radius:14px;
+  padding:22px;
+  background:white;
+  margin-top:14px;
+}
+.lesson-nav{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:28px;
+}
+footer{
+  text-align:center;
+  padding:28px 20px;
+  border-top:1px solid var(--line);
+  background:white;
+}
+@media(max-width:820px){
+  .course-layout{grid-template-columns:1fr}
+  .sidebar{position:static}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a class="brand" href="#">Ngoc Nguyen</a>
+  <nav>
+    <a href="#courses">Courses</a>
+    <a href="#html-course">HTML</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>Learn Technology</h1>
+  <p class="tagline">Learn • Share • Grow Together<br>Học • Chia sẻ • Cùng phát triển</p>
+
+  <div class="intro">
+    <p class="lang"><strong>English</strong>
+    Learning never stops. This is where I share what I've learned while building this website and exploring technology. I hope these lessons help beginners, and I always welcome new ideas so we can learn, share, and grow together.</p>
+
+    <p class="lang"><strong>Tiếng Việt</strong>
+    Việc học không bao giờ dừng lại. Đây là nơi mình chia sẻ những gì đã học được trong quá trình xây dựng website và tìm hiểu về công nghệ. Hy vọng những bài học này sẽ hữu ích cho người mới bắt đầu, và mình luôn sẵn sàng học hỏi những ý tưởng mới để chúng ta cùng học, cùng chia sẻ và cùng phát triển.</p>
+  </div>
+
+  <a class="btn" href="#html-course" onclick="showLesson(1)">Start Learning / Bắt đầu học</a>
+</section>
+
+<main class="wrap">
+<section id="courses">
+  <h2>Technology Courses / Các khóa học công nghệ</h2>
+  <div class="course-grid">
+    <article class="course-card">
+      <h2>HTML</h2>
+      <p class="muted">Learn the structure of a webpage through 10 practical lessons.</p>
+      <p class="muted">Học cấu trúc trang web qua 10 bài thực hành.</p>
+      <a class="btn" href="#html-course" onclick="showLesson(1)">Start Learning</a>
+    </article>
+
+    <article class="course-card">
+      <h2>CSS</h2>
+      <p class="muted">Style and organize webpages beautifully.</p>
+      <p class="muted">Trang trí và sắp xếp giao diện website.</p>
+      <span class="btn secondary">Coming Soon</span>
+    </article>
+
+    <article class="course-card">
+      <h2>JavaScript</h2>
+      <p class="muted">Make webpages interactive.</p>
+      <p class="muted">Tạo tương tác cho trang web.</p>
+      <span class="btn secondary">Coming Soon</span>
+    </article>
+
+    <article class="course-card">
+      <h2>Projects</h2>
+      <p class="muted">Build practical projects from what you learn.</p>
+      <p class="muted">Tạo dự án thực tế từ những kiến thức đã học.</p>
+      <span class="btn secondary">Coming Soon</span>
+    </article>
+  </div>
+</section>
+
+<section id="html-course" class="course-layout">
+  <aside class="sidebar">
+    <h3>HTML Course</h3>
+    <div class="lesson-list" id="lessonList"></div>
+  </aside>
+
+  <div>
+    <div class="progress-card">
+      <strong id="progressText">Lesson 1 of 10</strong>
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    </div>
+
+    <section class="lesson active" id="lesson-1">
+      <span class="badge">Lesson 1 / Bài 1</span>
+      <h2>Hero Section / Phần mở đầu</h2>
+      <p><strong>English:</strong> A hero section introduces the page and gives visitors a clear first impression.</p>
+      <p><strong>Tiếng Việt:</strong> Hero section giới thiệu trang và tạo ấn tượng đầu tiên rõ ràng cho người xem.</p>
+      <h3>HTML</h3>
+      <pre class="code">&lt;section class="hero"&gt;
+  &lt;h1&gt;Learn Technology&lt;/h1&gt;
+  &lt;p&gt;Learn • Share • Grow Together&lt;/p&gt;
+&lt;/section&gt;</pre>
+      <div class="explain"><strong>English:</strong> The section groups the content, h1 is the main title, and p adds supporting text.<br><strong>Tiếng Việt:</strong> section gom nội dung lại, h1 là tiêu đề chính, còn p là dòng mô tả hỗ trợ.</div>
+      <div class="preview"><h1>Learn Technology</h1><p>Learn • Share • Grow Together</p></div>
+      <div class="practice"><strong>Practice / Thực hành:</strong> Change the heading to your own topic. / Đổi tiêu đề thành chủ đề của bạn.</div>
+      <div class="lesson-nav"><button class="btn secondary" disabled>Previous</button><button class="btn" onclick="showLesson(2)">Next / Tiếp theo</button></div>
+    </section>
+
+    <section class="lesson" id="lesson-2">
+      <span class="badge">Lesson 2 / Bài 2</span>
+      <h2>Navigation Bar / Thanh điều hướng</h2>
+      <p><strong>English:</strong> Navigation links help visitors move between sections and pages.</p>
+      <p><strong>Tiếng Việt:</strong> Các liên kết điều hướng giúp người xem di chuyển giữa những phần và trang khác nhau.</p>
+      <pre class="code">&lt;nav&gt;
+  &lt;a href="index.html"&gt;Home&lt;/a&gt;
+  &lt;a href="learn-technology.html"&gt;Learn Technology&lt;/a&gt;
+&lt;/nav&gt;</pre>
+      <div class="explain"><strong>English:</strong> Each a element creates a clickable link.<br><strong>Tiếng Việt:</strong> Mỗi thẻ a tạo một liên kết có thể bấm.</div>
+      <div class="practice"><strong>Practice / Thực hành:</strong> Add a Contact link. / Thêm liên kết Contact.</div>
+      <div class="lesson-nav"><button class="btn secondary" onclick="showLesson(1)">Previous</button><button class="btn" onclick="showLesson(3)">Next</button></div>
+    </section>
+
+    <section class="lesson" id="lesson-3">
+      <span class="badge">Lesson 3 / Bài 3</span>
+      <h2>Buttons / Nút bấm</h2>
+      <p><strong>English:</strong> Buttons guide visitors toward an action.</p>
+      <p><strong>Tiếng Việt:</strong> Nút bấm hướng người xem đến một hành động cụ thể.</p>
+      <pre class="code">&lt;a class="btn" href="#html-course"&gt;
+  Start Learning
+&lt;/a&gt;</pre>
+      <div class="explain"><strong>English:</strong> This is a link styled to look like a button.<br><strong>Tiếng Việt:</strong> Đây là liên kết được trang trí để trông giống nút bấm.</div>
+      <div class="practice"><strong>Practice / Thực hành:</strong> Change the text to View Lessons. / Đổi chữ thành View Lessons.</div>
+      <div class="lesson-nav"><button class="btn secondary" onclick="showLesson(2)">Previous</button><button class="btn" onclick="showLesson(4)">Next</button></div>
+    </section>
+
+    <section class="lesson" id="lesson-4">
+      <span class="badge">Lesson 4 / Bài 4</span>
+      <h2>Cards / Thẻ nội dung</h2>
+      <p><strong>English:</strong> Cards organize related information into easy-to-read blocks.</p>
+      <p><strong>Tiếng Việt:</strong> Card sắp xếp thông tin liên quan thành từng khối dễ đọc.</p>
+      <pre class="code">&lt;article class="course-card"&gt;
+  &lt;h2&gt;HTML&lt;/h2&gt;
+  &lt;p&gt;10 practical lessons.&lt;/p&gt;
+&lt;/article&gt;</pre>
+      <div class="explain"><strong>English:</strong> article is useful for self-contained content.<br><strong>Tiếng Việt:</strong> article phù hợp với một nhóm nội dung độc lập.</div>
+      <div class="practice"><strong>Practice / Thực hành:</strong> Create another card for CSS. / Tạo thêm một card cho CSS.</div>
+      <div class="lesson-nav"><button class="btn secondary" onclick="showLesson(3)">Previous</button><button class="btn" onclick="showLesson(5)">Next</button></div>
+    </section>
+
+    <section class="lesson" id="lesson-5">
+      <span class="badge">Lesson 5 / Bài 5</span>
+      <h2>Images / Hình ảnh</h2>
+      <p><strong>English:</strong> Images make a page more visual and engaging.</p>
+      <p><strong>Tiếng Việt:</strong> Hình ảnh giúp trang web trực quan và hấp dẫn hơn.</p>
+      <pre class="code">&lt;img src="technology.jpg"
+     alt="Technology learning illustration"&gt;</pre>
+      <div class="explain"><strong>English:</strong> src is the file location. alt describes the image.<br><strong>Tiếng Việt:</strong> src là vị trí tệp. alt mô tả hình ảnh.</div>
+      <div class="practice"><strong>Practice / Thực hành:</strong> Replace the filename and write a clear alt description. / Đổi tên tệp và viết mô tả alt rõ ràng.</div>
+      <div class="lesson-nav"><button class="btn secondary" onclick="showLesson(4)">Previous</button><button class="btn" onclick="showLesson(6)">Next</button></div>
+    </section>
+
+    <section class="lesson" id="lesson-6">
+      <span class="badge">Lesson 6 / Bài 6</span>
+      <h2>Links / Liên kết</h2>
+      <p><strong>English:</strong> Links connect pages, files, email addresses, and outside websites.</p>
+      <p><strong>Tiếng Việt:</strong> Liên kết kết nối trang, tệp, email và website bên ngoài.</p>
+      <pre class="code">&lt;a href="html-course.html"&gt;
+  Open HTML Course
+&lt;/a&gt;</pre>
+      <div class="explain"><strong>English:</strong> href tells the browser where to go.<br><strong>Tiếng Việt:</strong> href cho trình duyệt biết phải đi đến đâu.</div>
+      <div class="practice"><strong>Practice / Thực hành:</strong> Link to your Resume page. / Tạo liên kết đến trang Resume.</div>
+      <div class="lesson-nav"><button class="btn secondary" onclick="showLesson(5)">Previous</button><button class="btn" onclick="showLesson(7)">Next</button></div>
+    </section>
+
+    <section class="lesson" id="lesson-7">
+      <span class="badge">Lesson 7 / Bài 7</span>
+      <h2>Forms / Biểu mẫu</h2>
+      <p><strong>English:</strong> Forms collect information from visitors.</p>
+      <p><strong>Tiếng Việt:</strong> Biểu mẫu thu thập thông tin từ người xem.</p>
+      <pre class="code">&lt;form&gt;
+  &lt;label for="name"&gt;Name&lt;/label&gt;
+  &lt;input id="name" name="name" type="text"&gt;
+  &lt;button type="submit"&gt;Send&lt;/button&gt;
+&lt;/form&gt;</pre>
+      <div class="explain"><strong>English:</strong> label explains the field, input collects information, and button submits it.<br><strong>Tiếng Việt:</strong> label giải thích ô nhập, input nhận dữ liệu, còn button gửi biểu mẫu.</div>
+      <div class="practice"><strong>Practice / Thực hành:</strong> Add an email field. / Thêm ô nhập email.</div>
+      <div class="lesson-nav"><button class="btn secondary" onclick="showLesson(6)">Previous</button><button class="btn" onclick="showLesson(8)">Next</button></div>
+    </section>
+
+    <section class="lesson" id="lesson-8">
+      <span class="badge">Lesson 8 / Bài 8</span>
+      <h2>Tables / Bảng</h2>
+      <p><strong>English:</strong> Tables display structured information in rows and columns.</p>
+      <p><strong>Tiếng Việt:</strong> Bảng trình bày thông tin có cấu trúc theo hàng và cột.</p>
+      <pre class="code">&lt;table&gt;
+  &lt;tr&gt;&lt;th&gt;Lesson&lt;/th&gt;&lt;th&gt;Topic&lt;/th&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;Hero Section&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;</pre>
+      <div class="explain"><strong>English:</strong> tr creates a row, th creates a heading cell, and td creates a data cell.<br><strong>Tiếng Việt:</strong> tr tạo hàng, th tạo ô tiêu đề, còn td tạo ô dữ liệu.</div>
+      <div class="practice"><strong>Practice / Thực hành:</strong> Add another lesson row. / Thêm một hàng bài học mới.</div>
+      <div class="lesson-nav"><button class="btn secondary" onclick="showLesson(7)">Previous</button><button class="btn" onclick="showLesson(9)">Next</button></div>
+    </section>
+
+    <section class="lesson" id="lesson-9">
+      <span class="badge">Lesson 9 / Bài 9</span>
+      <h2>Responsive Design / Thiết kế responsive</h2>
+      <p><strong>English:</strong> Responsive design helps a webpage work on phones, tablets, and computers.</p>
+      <p><strong>Tiếng Việt:</strong> Thiết kế responsive giúp trang web hiển thị tốt trên điện thoại, máy tính bảng và máy tính.</p>
+      <pre class="code">&lt;meta name="viewport"
+content="width=device-width, initial-scale=1"&gt;
+
+@media (max-width: 600px) {
+  h1 { font-size: 38px; }
+}</pre>
+      <div class="explain"><strong>English:</strong> The viewport setting and media query adjust the page for small screens.<br><strong>Tiếng Việt:</strong> Viewport và media query điều chỉnh trang cho màn hình nhỏ.</div>
+      <div class="practice"><strong>Practice / Thực hành:</strong> Reduce padding on small screens. / Giảm padding trên màn hình nhỏ.</div>
+      <div class="lesson-nav"><button class="btn secondary" onclick="showLesson(8)">Previous</button><button class="btn" onclick="showLesson(10)">Next</button></div>
+    </section>
+
+    <section class="lesson" id="lesson-10">
+      <span class="badge">Lesson 10 / Bài 10</span>
+      <h2>Build a Homepage / Hoàn thiện trang chủ</h2>
+      <p><strong>English:</strong> Combine headings, navigation, cards, images, links, and responsive design into one page.</p>
+      <p><strong>Tiếng Việt:</strong> Kết hợp tiêu đề, điều hướng, card, hình ảnh, liên kết và responsive thành một trang hoàn chỉnh.</p>
+      <pre class="code">&lt;header&gt;...&lt;/header&gt;
+&lt;main&gt;
+  &lt;section class="hero"&gt;...&lt;/section&gt;
+  &lt;section class="courses"&gt;...&lt;/section&gt;
+&lt;/main&gt;
+&lt;footer&gt;...&lt;/footer&gt;</pre>
+      <div class="explain"><strong>English:</strong> A complete page uses clear sections and meaningful HTML elements.<br><strong>Tiếng Việt:</strong> Một trang hoàn chỉnh sử dụng các phần rõ ràng và thẻ HTML có ý nghĩa.</div>
+      <div class="practice"><strong>Final Project / Dự án cuối:</strong> Build a small homepage about yourself or one topic you want to share. / Tạo một trang chủ nhỏ về bản thân hoặc một chủ đề bạn muốn chia sẻ.</div>
+      <div class="lesson-nav"><button class="btn secondary" onclick="showLesson(9)">Previous</button><a class="btn" href="#courses">Finish / Hoàn thành</a></div>
+    </section>
+  </div>
+</section>
+</main>
+
+<footer>
+  <strong>Learn • Share • Grow Together</strong><br>
+  Học • Chia sẻ • Cùng phát triển
+</footer>
+
+<script>
+const titles = [
+  "Hero Section",
+  "Navigation Bar",
+  "Buttons",
+  "Cards",
+  "Images",
+  "Links",
+  "Forms",
+  "Tables",
+  "Responsive Design",
+  "Build a Homepage"
+];
+
+const list = document.getElementById("lessonList");
+
+titles.forEach((title, index) => {
+  const button = document.createElement("button");
+  button.textContent = `Lesson ${index + 1}: ${title}`;
+  button.onclick = () => showLesson(index + 1);
+  if(index === 0) button.classList.add("active");
+  list.appendChild(button);
+});
+
+function showLesson(number){
+  document.querySelectorAll(".lesson").forEach(el => el.classList.remove("active"));
+  document.querySelectorAll(".lesson-list button").forEach(el => el.classList.remove("active"));
+
+  const lesson = document.getElementById(`lesson-${number}`);
+  if(lesson) lesson.classList.add("active");
+
+  const button = document.querySelectorAll(".lesson-list button")[number - 1];
+  if(button) button.classList.add("active");
+
+  document.getElementById("progressText").textContent = `Lesson ${number} of 10`;
+  document.getElementById("progressFill").style.width = `${number * 10}%`;
+
+  document.getElementById("html-course").scrollIntoView({behavior:"smooth", block:"start"});
+}
+</script>
+</body>
+</html>

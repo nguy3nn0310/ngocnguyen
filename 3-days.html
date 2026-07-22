@@ -4,18 +4,133 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>3-Day Guides | Ngoc Nguyen</title>
-  <meta name="description" content="English–Vietnamese beginner sports guides created by Ngoc Tran Nhut Nguyen.">
+  <meta name="description" content="Basic English–Vietnamese sports guides shared by Ngoc Tran Nhut Nguyen, with coach recommendations for advanced learning.">
   <link rel="stylesheet" href="style.css">
+
+  <style>
+    .guide-note {
+      max-width: 820px;
+    }
+
+    .real-book-card {
+      text-decoration: none;
+      color: inherit;
+      overflow: hidden;
+    }
+
+    .real-book-card img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      background: #f1eee8;
+    }
+
+    .guide-button {
+      border: 0;
+      cursor: pointer;
+      font: inherit;
+    }
+
+    .coach-section {
+      padding-top: 10px;
+    }
+
+    .coach-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .coach-card {
+      overflow: hidden;
+    }
+
+    .coach-card img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+    }
+
+    .coach-content {
+      padding: 22px;
+    }
+
+    .coach-label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .beginner-note {
+      margin-top: 28px;
+      padding: 18px 20px;
+      border-radius: 16px;
+      background: rgba(255,255,255,.7);
+    }
+
+    dialog {
+      width: min(96vw, 1500px);
+      max-height: 94vh;
+      padding: 0;
+      border: 0;
+      border-radius: 18px;
+      overflow: auto;
+      box-shadow: 0 24px 80px rgba(0,0,0,.35);
+    }
+
+    dialog::backdrop {
+      background: rgba(0,0,0,.76);
+    }
+
+    dialog img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .dialog-close {
+      position: sticky;
+      top: 10px;
+      float: right;
+      z-index: 2;
+      margin: 12px;
+      padding: 10px 14px;
+      border: 0;
+      border-radius: 999px;
+      background: #fff;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(0,0,0,.2);
+    }
+
+    @media (max-width: 760px) {
+      .coach-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
+
 <body>
 <header class="site-header">
-  <a class="brand" href="index.html"><span class="logo">NN</span><span>NGOC NGUYEN</span></a>
+  <a class="brand" href="index.html">
+    <span class="logo">NN</span>
+    <span>NGOC NGUYEN</span>
+  </a>
+
   <button class="menu-btn" type="button" aria-label="Open navigation" aria-expanded="false">☰</button>
+
   <nav class="site-nav">
     <a href="index.html">Resume</a>
     <a href="sharing.html">Trusted Resources</a>
     <a class="active" href="3-days.html">3-Day Guides</a>
     <a href="family-recipes.html">Family Recipes</a>
+    <a href="posters.html">Posters</a>
     <a href="index.html#contact">Contact</a>
   </nav>
 </header>
@@ -23,56 +138,170 @@
 <main>
   <section class="hero">
     <div class="section-inner">
-      <span class="badge">BILINGUAL BEGINNER BOOKS</span>
+      <span class="badge">BILINGUAL BEGINNER GUIDES</span>
       <h1>3-Day Guides</h1>
-      <p class="lead">The original Golf, Basketball, Baseball, and Archery books are preserved here. Tap a cover to open the complete book image.</p>
+
+      <p class="lead guide-note">
+        I share the basic sports knowledge I know in simple English and Vietnamese.
+        Click a cover to open the complete visual guide. When I discover another useful
+        sport, beginner resource, or place to learn, I can add it here later.
+      </p>
     </div>
   </section>
 
   <section class="section">
     <div class="section-inner">
       <div class="book-grid real-book-grid">
-        <a class="card real-book-card" href="golf-book.html">
-          <img src="assets/golf-cover.jpg" alt="Golf in 3 Days cover">
+
+        <article class="card real-book-card">
+          <button class="guide-button" type="button"
+                  onclick="openGuide('assets/3day/golf-guide.jpeg', 'Golf in 3 Days')">
+            <img src="assets/3day/golf-cover.jpeg" alt="Golf in 3 Days cover">
+          </button>
+
           <div class="book-content">
             <h3>Golf in 3 Days</h3>
             <p>Golf trong 3 ngày</p>
-            <span class="btn primary">View Full Book</span>
+            <button class="btn primary guide-button" type="button"
+                    onclick="openGuide('assets/3day/golf-guide.jpeg', 'Golf in 3 Days')">
+              View Full Guide
+            </button>
           </div>
-        </a>
+        </article>
 
-        <a class="card real-book-card" href="basketball-book.html">
-          <img src="assets/basketball-cover.jpg" alt="Basketball in 3 Days cover">
+        <article class="card real-book-card">
+          <button class="guide-button" type="button"
+                  onclick="openGuide('assets/3day/basketball-guide.jpeg', 'Basketball in 3 Days')">
+            <img src="assets/3day/basketball-cover.jpeg" alt="Basketball in 3 Days cover">
+          </button>
+
           <div class="book-content">
             <h3>Basketball in 3 Days</h3>
             <p>Bóng rổ trong 3 ngày</p>
-            <span class="btn primary">View Full Book</span>
+            <button class="btn primary guide-button" type="button"
+                    onclick="openGuide('assets/3day/basketball-guide.jpeg', 'Basketball in 3 Days')">
+              View Full Guide
+            </button>
           </div>
-        </a>
+        </article>
 
-        <a class="card real-book-card" href="baseball-book.html">
-          <img src="assets/baseball-cover.jpg" alt="Baseball in 3 Days cover">
+        <article class="card real-book-card">
+          <button class="guide-button" type="button"
+                  onclick="openGuide('assets/3day/baseball-guide.jpeg', 'Baseball in 3 Days')">
+            <img src="assets/3day/baseball-cover.jpeg" alt="Baseball in 3 Days cover">
+          </button>
+
           <div class="book-content">
             <h3>Baseball in 3 Days</h3>
             <p>Bóng chày trong 3 ngày</p>
-            <span class="btn primary">View Full Book</span>
+            <button class="btn primary guide-button" type="button"
+                    onclick="openGuide('assets/3day/baseball-guide.jpeg', 'Baseball in 3 Days')">
+              View Full Guide
+            </button>
           </div>
-        </a>
+        </article>
 
-        <a class="card real-book-card" href="archery-book.html">
-          <img src="assets/archery-cover.jpg" alt="Archery in 3 Days cover">
+        <article class="card real-book-card">
+          <button class="guide-button" type="button"
+                  onclick="openGuide('assets/3day/archery-guide.jpeg', 'Archery in 3 Days')">
+            <img src="assets/3day/archery-cover.png" alt="Archery in 3 Days cover">
+          </button>
+
           <div class="book-content">
             <h3>Archery in 3 Days</h3>
             <p>Bắn cung trong 3 ngày</p>
-            <span class="btn primary">View Full Book</span>
+            <button class="btn primary guide-button" type="button"
+                    onclick="openGuide('assets/3day/archery-guide.jpeg', 'Archery in 3 Days')">
+              View Full Guide
+            </button>
           </div>
-        </a>
+        </article>
+
+      </div>
+
+      <div class="beginner-note">
+        <strong>Beginner level:</strong>
+        These guides share basic information and personal learning notes.
+        For advanced training, technique correction, or structured lessons,
+        I recommend learning directly from a qualified coach.
+      </div>
+    </div>
+  </section>
+
+  <section class="section coach-section">
+    <div class="section-inner">
+      <span class="badge">ADVANCED LEARNING</span>
+      <h2>Learn More With a Coach</h2>
+
+      <p class="lead guide-note">
+        For advanced lessons, I can recommend a coach below.
+        Contact details and booking links can be added later.
+      </p>
+
+      <div class="coach-grid">
+        <article class="card coach-card">
+          <img src="assets/3day/coach-basketball.jpeg"
+               alt="Basketball coach wearing a black HH number 22 shirt">
+
+          <div class="coach-content">
+            <span class="coach-label">Basketball coaching</span>
+            <h3>Basketball Coach</h3>
+            <p>
+              For ball handling, shooting, teamwork, confidence,
+              and structured basketball practice.
+            </p>
+            <span class="btn primary">Coach Details Coming Soon</span>
+          </div>
+        </article>
+
+        <article class="card coach-card">
+          <img src="assets/3day/coach-golf.jpeg"
+               alt="Golf coach wearing a black HH number 22 shirt">
+
+          <div class="coach-content">
+            <span class="coach-label">Golf coaching</span>
+            <h3>Golf Coach</h3>
+            <p>
+              For swing improvement, course strategy,
+              practice planning, and one-on-one golf instruction.
+            </p>
+            <span class="btn primary">Coach Details Coming Soon</span>
+          </div>
+        </article>
       </div>
     </div>
   </section>
 </main>
 
-<footer>© <span data-year></span> Ngoc Tran Nhut Nguyen · 3-Day Guides</footer>
+<dialog id="guide-dialog">
+  <button class="dialog-close" type="button" onclick="closeGuide()">Close ✕</button>
+  <img id="guide-image" src="" alt="">
+</dialog>
+
+<footer>
+  © <span data-year></span> Ngoc Tran Nhut Nguyen · 3-Day Guides
+</footer>
+
 <script src="app.js"></script>
+<script>
+  function openGuide(imagePath, title) {
+    const dialog = document.getElementById('guide-dialog');
+    const image = document.getElementById('guide-image');
+
+    image.src = imagePath;
+    image.alt = title + ' complete visual guide';
+    dialog.showModal();
+  }
+
+  function closeGuide() {
+    document.getElementById('guide-dialog').close();
+  }
+
+  document.getElementById('guide-dialog').addEventListener('click', function (event) {
+    if (event.target === this) {
+      this.close();
+    }
+  });
+</script>
 </body>
 </html>

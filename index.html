@@ -9,23 +9,25 @@
 </head>
 <body>
 <header class="site-header">
-  <a class="brand" href="index.html"><span class="logo">NN</span><span>NGOC NGUYEN</span></a>
+  <a class="brand" href="index.html"><span class="logo">NN</span><span class="brand-name">NGOC NGUYEN</span></a>
   <button class="menu-btn" type="button" aria-label="Open navigation" aria-expanded="false">☰</button>
   <nav class="site-nav">
     <a class="active" href="index.html">Resume</a>
     <a href="sharing.html">Trusted Resources</a>
     <a href="3-days.html">3-Day Guides</a>
+    <a href="family-recipes.html">Family Recipes</a>
+    <a href="posters.html">Posters</a>
     <a href="#contact">Contact</a>
   </nav>
 </header>
 
 <main>
-  <section class="hero">
-    <div class="hero-grid">
-      <div>
+  <section class="hero home-hero">
+    <div class="hero-grid home-hero-grid">
+      <div class="hero-copy">
         <span class="badge">ROUND ROCK, TEXAS</span>
-        <h1>Ngoc<br>Nguyen</h1>
-        <p class="lead"><strong>IT Support · Office Support · Property Operations</strong></p>
+        <h1>Ngoc Nguyen</h1>
+        <p class="hero-role">IT Support · Office Support · Property Operations</p>
         <p class="lead">Technology-focused support backed by hands-on office organization and property operations experience.</p>
         <div class="actions">
           <a class="btn primary" href="NgocNguyen_Resume.docx">View Resume</a>
@@ -33,41 +35,59 @@
         </div>
       </div>
 
-      <aside class="profile-card">
+      <aside class="profile-card home-profile-card">
         <div class="profile-top">
-          <span class="logo">NN</span>
-          <div><strong>Ngoc Nguyen</strong><br><span class="note">Technology + Operations Support</span></div>
+          <span class="logo large-logo">NN</span>
+          <div>
+            <strong class="profile-name">Ngoc Nguyen</strong>
+            <div class="note">Technology + Operations Support</div>
+          </div>
         </div>
+
         <div class="profile-grid">
-          <div class="mini"><div class="label">EDUCATION</div><strong>B.S. Information Technology</strong></div>
-          <div class="mini"><div class="label">CERTIFICATION</div><strong>CCNA · 2024</strong></div>
-          <div class="mini"><div class="label">LANGUAGES</div><strong>Vietnamese & English</strong></div>
-          <div class="mini"><div class="label">WORK STATUS</div><strong>Authorized in the U.S.</strong></div>
+          <div class="mini">
+            <div class="label">EDUCATION</div>
+            <strong>B.S. Information Technology</strong>
+          </div>
+          <div class="mini">
+            <div class="label">CERTIFICATION</div>
+            <strong>CCNA · 2024</strong>
+          </div>
+          <div class="mini">
+            <div class="label">LANGUAGES</div>
+            <strong>Vietnamese & English</strong>
+          </div>
+          <div class="mini">
+            <div class="label">WORK STATUS</div>
+            <strong>Authorized in the U.S.</strong>
+          </div>
         </div>
       </aside>
     </div>
   </section>
 
-  <section class="section">
+  <section class="section home-section">
     <div class="section-inner">
-      <div class="section-head">
-        <span class="smallcaps">What I Do</span>
-        <h2>Practical support for technology and daily operations.</h2>
+      <div class="section-head compact-head">
+        <span class="smallcaps">Professional Support</span>
+        <h2>Practical help for technology and daily operations.</h2>
       </div>
 
-      <div class="grid">
-        <article class="card">
-          <div class="card-top">💻</div>
+      <div class="grid service-grid">
+        <article class="card home-card">
+          <div class="card-top compact-icon">💻</div>
           <h3>IT Support</h3>
           <p>Computers, printers, Wi-Fi, email, accounts, shared files, Synology, and everyday troubleshooting.</p>
         </article>
-        <article class="card">
-          <div class="card-top">🗂️</div>
+
+        <article class="card home-card">
+          <div class="card-top compact-icon">🗂️</div>
           <h3>Office Support</h3>
           <p>Documentation, scanning, spreadsheets, calendars, records, communication, and organized workflows.</p>
         </article>
-        <article class="card">
-          <div class="card-top">🏠</div>
+
+        <article class="card home-card">
+          <div class="card-top compact-icon">🏠</div>
           <h3>Property Operations</h3>
           <p>Buildium support, maintenance tracking, listings, tenant and owner communication, invoices, and property records.</p>
         </article>
@@ -75,28 +95,41 @@
     </div>
   </section>
 
-  <section class="section alt">
+  <section class="section alt home-projects-section">
     <div class="section-inner">
-      <div class="grid two-col">
-        <article class="card">
-          <div class="card-top">🤝</div>
+      <div class="section-head compact-head">
+        <span class="smallcaps">Personal Projects</span>
+        <h2>Guides, trusted resources, and family recipes.</h2>
+      </div>
+
+      <div class="grid project-grid">
+        <article class="card home-card project-card">
+          <div class="card-top compact-icon">🤝</div>
           <h3>Trusted Resources</h3>
           <p>A growing directory of local places, services, community resources, and helpful information.</p>
           <a class="btn primary" href="sharing.html">Open Trusted Resources</a>
         </article>
-        <article class="card">
-          <div class="card-top">📚</div>
+
+        <article class="card home-card project-card">
+          <div class="card-top compact-icon">📚</div>
           <h3>3-Day Guides</h3>
-          <p>Simple English–Vietnamese sports guides that help complete beginners get started step by step.</p>
+          <p>Simple English–Vietnamese beginner sports guides with clickable full-book pages.</p>
           <a class="btn primary" href="3-days.html">Open 3-Day Guides</a>
+        </article>
+
+        <article class="card home-card project-card">
+          <div class="card-top compact-icon">🍽️</div>
+          <h3>Family Recipes</h3>
+          <p>Premium bilingual family recipe cards and downloadable recipe collections made with love.</p>
+          <a class="btn primary" href="family-recipes.html">Open Family Recipes</a>
         </article>
       </div>
     </div>
   </section>
 
-  <section class="section" id="contact">
+  <section class="section home-contact-section" id="contact">
     <div class="section-inner">
-      <div class="contact-panel">
+      <div class="contact-panel compact-contact">
         <span class="smallcaps">Contact</span>
         <h2>Let’s connect.</h2>
         <p>Email Ngoc about work opportunities, local resources, or website information.</p>

@@ -155,15 +155,15 @@
 
         <article class="card real-book-card">
           <button class="guide-button" type="button"
-                  onclick="openGuide('assets/3day/golfdetail.jpeg', 'Golf in 3 Days')">
-            <img src="assets/3day/golfnn.jpeg" alt="Golf in 3 Days cover">
+                  onclick="openGuide('assets/3day/golfdetail', 'Golf in 3 Days')">
+            <img src="" data-image-base="assets/3day/golfnn" alt="Golf in 3 Days cover">
           </button>
 
           <div class="book-content">
             <h3>Golf in 3 Days</h3>
             <p>Golf trong 3 ngày</p>
             <button class="btn primary guide-button" type="button"
-                    onclick="openGuide('assets/3day/golfdetail.jpeg', 'Golf in 3 Days')">
+                    onclick="openGuide('assets/3day/golfdetail', 'Golf in 3 Days')">
               View Full Guide
             </button>
           </div>
@@ -171,15 +171,15 @@
 
         <article class="card real-book-card">
           <button class="guide-button" type="button"
-                  onclick="openGuide('assets/3day/basketballdetail.jpeg', 'Basketball in 3 Days')">
-            <img src="assets/3day/basketballnn.jpeg" alt="Basketball in 3 Days cover">
+                  onclick="openGuide('assets/3day/basketballdetail', 'Basketball in 3 Days')">
+            <img src="" data-image-base="assets/3day/basketballnn" alt="Basketball in 3 Days cover">
           </button>
 
           <div class="book-content">
             <h3>Basketball in 3 Days</h3>
             <p>Bóng rổ trong 3 ngày</p>
             <button class="btn primary guide-button" type="button"
-                    onclick="openGuide('assets/3day/basketballdetail.jpeg', 'Basketball in 3 Days')">
+                    onclick="openGuide('assets/3day/basketballdetail', 'Basketball in 3 Days')">
               View Full Guide
             </button>
           </div>
@@ -187,15 +187,15 @@
 
         <article class="card real-book-card">
           <button class="guide-button" type="button"
-                  onclick="openGuide('assets/3day/baseballdetail.jpeg', 'Baseball in 3 Days')">
-            <img src="assets/3day/baseballnn.jpeg" alt="Baseball in 3 Days cover">
+                  onclick="openGuide('assets/3day/baseballdetail', 'Baseball in 3 Days')">
+            <img src="" data-image-base="assets/3day/baseballnn" alt="Baseball in 3 Days cover">
           </button>
 
           <div class="book-content">
             <h3>Baseball in 3 Days</h3>
             <p>Bóng chày trong 3 ngày</p>
             <button class="btn primary guide-button" type="button"
-                    onclick="openGuide('assets/3day/baseballdetail.jpeg', 'Baseball in 3 Days')">
+                    onclick="openGuide('assets/3day/baseballdetail', 'Baseball in 3 Days')">
               View Full Guide
             </button>
           </div>
@@ -203,15 +203,15 @@
 
         <article class="card real-book-card">
           <button class="guide-button" type="button"
-                  onclick="openGuide('assets/3day/archerydetail.jpeg', 'Archery in 3 Days')">
-            <img src="assets/3day/archerynn.png" alt="Archery in 3 Days cover">
+                  onclick="openGuide('assets/3day/archerydetail', 'Archery in 3 Days')">
+            <img src="" data-image-base="assets/3day/archerynn" alt="Archery in 3 Days cover">
           </button>
 
           <div class="book-content">
             <h3>Archery in 3 Days</h3>
             <p>Bắn cung trong 3 ngày</p>
             <button class="btn primary guide-button" type="button"
-                    onclick="openGuide('assets/3day/archerydetail.jpeg', 'Archery in 3 Days')">
+                    onclick="openGuide('assets/3day/archerydetail', 'Archery in 3 Days')">
               View Full Guide
             </button>
           </div>
@@ -240,7 +240,7 @@
 
       <div class="coach-grid">
         <article class="card coach-card">
-          <img src="assets/3day/coachbasketball.jpeg"
+          <img src="" data-image-base="assets/3day/coachbasketball"
                alt="Basketball coach wearing a black HH number 22 shirt">
 
           <div class="coach-content">
@@ -255,7 +255,7 @@
         </article>
 
         <article class="card coach-card">
-          <img src="assets/3day/coachgolf.jpeg"
+          <img src="" data-image-base="assets/3day/coachgolf"
                alt="Golf coach wearing a black HH number 22 shirt">
 
           <div class="coach-content">
@@ -284,12 +284,31 @@
 
 <script src="app.js"></script>
 <script>
-  function openGuide(imagePath, title) {
+  const imageExtensions = ['.jpeg', '.jpg', '.png', '.webp', '.JPG', '.JPEG', '.PNG', '.WEBP'];
+
+  function loadImageWithFallback(image, basePath, extensionIndex = 0) {
+    if (extensionIndex >= imageExtensions.length) {
+      image.alt = image.alt + ' — image file not found';
+      return;
+    }
+
+    image.onerror = function () {
+      loadImageWithFallback(image, basePath, extensionIndex + 1);
+    };
+
+    image.src = basePath + imageExtensions[extensionIndex];
+  }
+
+  document.querySelectorAll('[data-image-base]').forEach(function (image) {
+    loadImageWithFallback(image, image.dataset.imageBase);
+  });
+
+  function openGuide(imageBasePath, title) {
     const dialog = document.getElementById('guide-dialog');
     const image = document.getElementById('guide-image');
 
-    image.src = imagePath;
     image.alt = title + ' complete visual guide';
+    loadImageWithFallback(image, imageBasePath);
     dialog.showModal();
   }
 

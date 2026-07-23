@@ -96,9 +96,8 @@ a{text-decoration:none}
 }
 .course-grid{
   display:grid;
-  grid-template-columns:repeat(4,minmax(0,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
   gap:20px;
-  align-items:stretch;
 }
 .course-card,.lesson,.sidebar,.progress-card{
   background:var(--white);
@@ -106,28 +105,8 @@ a{text-decoration:none}
   border-radius:18px;
   box-shadow:0 10px 30px rgba(65,73,73,.06);
 }
-.course-card{
-  padding:24px;
-  min-height:300px;
-  display:flex;
-  flex-direction:column;
-}
-.course-card h2{
-  margin:0 0 14px;
-  color:var(--brown);
-}
-.course-card .muted{
-  margin:0 0 14px;
-}
-.course-card .btn{
-  margin-top:auto;
-  width:100%;
-  min-height:48px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-}
+.course-card{padding:24px}
+.course-card h2{margin-top:0;color:var(--brown)}
 .muted{color:#6e7777}
 .course-layout{
   display:grid;
@@ -239,16 +218,9 @@ footer{
   border-top:1px solid var(--line);
   background:white;
 }
-@media(max-width:1000px){
-  .course-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-}
 @media(max-width:820px){
   .course-layout{grid-template-columns:1fr}
   .sidebar{position:static}
-}
-@media(max-width:560px){
-  .course-grid{grid-template-columns:1fr}
-  .course-card{min-height:auto}
 }
 </style>
 </head>
@@ -382,13 +354,67 @@ footer{
 
     <section class="lesson" id="lesson-5">
       <span class="badge">Lesson 5 / Bài 5</span>
-      <h2>Images / Hình ảnh</h2>
-      <p><strong>English:</strong> Images make a page more visual and engaging.</p>
-      <p><strong>Tiếng Việt:</strong> Hình ảnh giúp trang web trực quan và hấp dẫn hơn.</p>
-      <pre class="code">&lt;img src="technology.jpg"
-     alt="Technology learning illustration"&gt;</pre>
-      <div class="explain"><strong>English:</strong> src is the file location. alt describes the image.<br><strong>Tiếng Việt:</strong> src là vị trí tệp. alt mô tả hình ảnh.</div>
-      <div class="practice"><strong>Practice / Thực hành:</strong> Replace the filename and write a clear alt description. / Đổi tên tệp và viết mô tả alt rõ ràng.</div>
+      <h2>Fix Uneven Cards with Flexbox / Sửa card không đều bằng Flexbox</h2>
+
+      <p><strong>English:</strong> This lesson comes from a real layout problem on this website: the four course cards did not look even because each card had a different amount of text.</p>
+      <p><strong>Tiếng Việt:</strong> Bài học này xuất phát từ một lỗi bố cục thật trên website: bốn card khóa học nhìn không đều vì mỗi card có lượng nội dung khác nhau.</p>
+
+      <h3>Before / Trước khi sửa</h3>
+      <div class="preview">
+        <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;align-items:start">
+          <div style="border:1px solid #ccd6d6;border-radius:12px;padding:14px;background:#fff"><h4 style="margin-top:0">HTML</h4><p>Learn the structure of a webpage through ten practical lessons.</p><a class="btn" href="javascript:void(0)">Start Learning</a></div>
+          <div style="border:1px solid #ccd6d6;border-radius:12px;padding:14px;background:#fff"><h4 style="margin-top:0">CSS</h4><p>Style webpages beautifully.</p><span class="btn secondary">Coming Soon</span></div>
+          <div style="border:1px solid #ccd6d6;border-radius:12px;padding:14px;background:#fff"><h4 style="margin-top:0">JavaScript</h4><p>Make webpages interactive.</p><span class="btn secondary">Coming Soon</span></div>
+          <div style="border:1px solid #ccd6d6;border-radius:12px;padding:14px;background:#fff"><h4 style="margin-top:0">Projects</h4><p>Build practical projects.</p><span class="btn secondary">Coming Soon</span></div>
+        </div>
+      </div>
+
+      <div class="explain"><strong>English:</strong> Each card grows only as much as its content needs. More text creates a taller card, and the buttons do not line up.<br><strong>Tiếng Việt:</strong> Mỗi card chỉ cao theo lượng nội dung bên trong. Card có nhiều chữ sẽ cao hơn và các nút không nằm thẳng hàng.</div>
+
+      <h3>Original CSS / CSS ban đầu</h3>
+      <pre class="code">.course-card{
+  padding:24px;
+}</pre>
+      <p><strong>English:</strong> This code only adds inner spacing. It does not control card height or button position.</p>
+      <p><strong>Tiếng Việt:</strong> Đoạn code này chỉ tạo khoảng cách bên trong. Nó không kiểm soát chiều cao card hoặc vị trí nút.</p>
+
+      <h3>Solution / Cách sửa</h3>
+      <pre class="code">.course-grid{
+  display:grid;
+  align-items:stretch;
+}
+
+.course-card{
+  display:flex;
+  flex-direction:column;
+  min-height:300px;
+}
+
+.course-card .btn{
+  margin-top:auto;
+}</pre>
+
+      <h3>Line-by-Line Explanation / Giải thích từng dòng</h3>
+      <div class="explain"><strong>display: grid</strong><br>English: Creates the card layout.<br>Tiếng Việt: Tạo bố cục dạng lưới cho các card.</div>
+      <div class="explain"><strong>align-items: stretch</strong><br>English: Makes cards in the same row stretch to equal height.<br>Tiếng Việt: Làm các card trong cùng một hàng giãn ra bằng chiều cao.</div>
+      <div class="explain"><strong>display: flex + flex-direction: column</strong><br>English: Turns each card into a vertical Flexbox container.<br>Tiếng Việt: Biến mỗi card thành một Flexbox theo chiều dọc.</div>
+      <div class="explain"><strong>min-height: 300px</strong><br>English: Gives every card a consistent minimum height.<br>Tiếng Việt: Tạo chiều cao tối thiểu giống nhau cho mỗi card.</div>
+      <div class="explain"><strong>margin-top: auto</strong><br>English: Pushes the button to the bottom so all buttons align.<br>Tiếng Việt: Đẩy nút xuống cuối card để tất cả các nút nằm thẳng hàng.</div>
+
+      <h3>After / Sau khi sửa</h3>
+      <div class="preview">
+        <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;align-items:stretch">
+          <div style="border:1px solid #ccd6d6;border-radius:12px;padding:14px;background:#fff;display:flex;flex-direction:column;min-height:220px"><h4 style="margin-top:0">HTML</h4><p>Learn the structure of a webpage through ten practical lessons.</p><a class="btn" style="margin-top:auto;text-align:center" href="javascript:void(0)">Start Learning</a></div>
+          <div style="border:1px solid #ccd6d6;border-radius:12px;padding:14px;background:#fff;display:flex;flex-direction:column;min-height:220px"><h4 style="margin-top:0">CSS</h4><p>Style webpages beautifully.</p><span class="btn secondary" style="margin-top:auto;text-align:center">Coming Soon</span></div>
+          <div style="border:1px solid #ccd6d6;border-radius:12px;padding:14px;background:#fff;display:flex;flex-direction:column;min-height:220px"><h4 style="margin-top:0">JavaScript</h4><p>Make webpages interactive.</p><span class="btn secondary" style="margin-top:auto;text-align:center">Coming Soon</span></div>
+          <div style="border:1px solid #ccd6d6;border-radius:12px;padding:14px;background:#fff;display:flex;flex-direction:column;min-height:220px"><h4 style="margin-top:0">Projects</h4><p>Build practical projects.</p><span class="btn secondary" style="margin-top:auto;text-align:center">Coming Soon</span></div>
+        </div>
+      </div>
+
+      <div class="practice"><strong>Practice Challenge / Bài tập thực hành:</strong><br>English: Change <code>min-height:300px</code> to <code>260px</code> and then <code>360px</code>. Observe how the layout changes.<br>Tiếng Việt: Đổi <code>min-height:300px</code> thành <code>260px</code>, sau đó thành <code>360px</code>. Quan sát sự thay đổi của bố cục.</div>
+
+      <div class="explain"><strong>Key Takeaway / Điều quan trọng:</strong><br>English: CSS is not only about memorizing properties. It is about solving real design problems.<br>Tiếng Việt: CSS không chỉ là ghi nhớ thuộc tính. Quan trọng hơn là biết giải quyết vấn đề thiết kế thực tế.</div>
+
       <div class="lesson-nav"><button class="btn secondary" onclick="showLesson(4)">Previous</button><button class="btn" onclick="showLesson(6)">Next</button></div>
     </section>
 

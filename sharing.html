@@ -6,6 +6,20 @@
   <title>Trusted Resources | Ngoc Nguyen</title>
   <meta name="description" content="A growing directory of places, services, community resources, and helpful information personally trusted or found useful by Ngoc Nguyen.">
   <link rel="stylesheet" href="style.css">
+
+  <style>
+    .listing-cta{margin-top:1.5rem;padding:1.25rem;border-radius:18px;display:flex;gap:1rem;align-items:center;justify-content:space-between;background:rgba(255,255,255,.72);border:1px solid rgba(56,76,70,.16);box-shadow:0 14px 35px rgba(36,55,51,.08)}
+    .listing-cta h2{margin:.35rem 0 .25rem}.listing-cta p{margin:0}
+    .section-heading{text-align:center;max-width:760px;margin:0 auto 1.5rem}.section-heading h2{margin:.5rem 0}
+    .pricing-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.25rem;max-width:960px;margin:0 auto}
+    .pricing-card{position:relative;padding:1.5rem;border-radius:20px;background:#fff;border:1px solid rgba(56,76,70,.14);box-shadow:0 16px 38px rgba(36,55,51,.08)}
+    .pricing-card h3{font-size:2rem;margin:.55rem 0 .15rem}.pricing-card h3 span{font-size:1rem;font-weight:600}
+    .price-note{margin-top:0;opacity:.72}.pricing-card ul{padding-left:1.25rem;line-height:1.85;margin:1rem 0 1.25rem}
+    .featured-plan{border:2px solid #7bb9bd;transform:translateY(-4px)}
+    .featured-ribbon{position:absolute;top:1rem;right:1rem;font-size:.72rem;font-weight:800;letter-spacing:.08em;padding:.4rem .65rem;border-radius:999px;background:#d9f0f2;color:#244b50}
+    .disclosure{max-width:960px;margin:1.25rem auto 0;padding:1rem 1.1rem;border-radius:14px;background:rgba(255,255,255,.7);border:1px solid rgba(56,76,70,.12)}
+    @media (max-width:760px){.pricing-grid{grid-template-columns:1fr}.featured-plan{transform:none}.listing-cta{align-items:flex-start;flex-direction:column}}
+  </style>
 </head>
 <body>
 <header class="site-header">
@@ -24,10 +38,19 @@
 <main>
   <section class="hero resource-hero">
     <div class="section-inner">
-      <span class="badge">PERSONAL RECOMMENDATIONS</span>
+      <span class="badge">LOCAL BUSINESS & COMMUNITY DIRECTORY</span>
       <h1>Trusted Resources</h1>
-      <p class="lead">A growing directory of places, services, and community resources that I personally trust or have found useful.</p>
-      <div class="trust-note"><strong>My sharing promise:</strong> These are personal recommendations, not paid advertisements. Please confirm current hours, pricing, availability, and service details directly.</div>
+      <p class="lead">A growing directory of local businesses, services, and community resources I personally trust or have found useful.</p>
+      <div class="trust-note"><strong>Directory note:</strong> Most listings are personal recommendations or useful local resources. Businesses may also choose a clearly labeled paid Featured placement for $30/month. Paid placement does not guarantee or influence a positive recommendation. Please confirm current hours, pricing, availability, and service details directly.</div>
+
+      <div class="listing-cta" aria-label="List your business">
+        <div>
+          <span class="tag">FOR LOCAL BUSINESSES</span>
+          <h2>List Your Business</h2>
+          <p>Choose a free basic listing or a Featured listing for $30/month.</p>
+        </div>
+        <a class="btn primary" href="mailto:nguy3nn0310@gmail.com?subject=List%20My%20Business">List Your Business</a>
+      </div>
 
       <div class="search-panel">
         <label class="sr-only" for="sharingSearch">Search trusted resources</label>
@@ -45,6 +68,50 @@
           <button class="filter" data-filter="resources" type="button">Helpful Resources</button>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section class="section pricing-section" id="list-your-business">
+    <div class="section-inner">
+      <div class="section-heading">
+        <span class="badge">BUSINESS LISTING OPTIONS</span>
+        <h2>Free or Featured</h2>
+        <p>Start with a free listing or choose a more visible Featured placement.</p>
+      </div>
+
+      <div class="pricing-grid">
+        <article class="pricing-card">
+          <span class="tag">Free Listing</span>
+          <h3>$0</h3>
+          <p class="price-note">No monthly fee</p>
+          <ul>
+            <li>Business name and category</li>
+            <li>Address and Open Map link</li>
+            <li>Phone, website, or social link</li>
+            <li>Short business description</li>
+            <li>One photo when available</li>
+          </ul>
+          <a class="btn" href="mailto:nguy3nn0310@gmail.com?subject=Free%20Business%20Listing">Request Free Listing</a>
+        </article>
+
+        <article class="pricing-card featured-plan">
+          <span class="featured-ribbon">FEATURED</span>
+          <span class="tag">Featured Listing</span>
+          <h3>$30<span>/month</span></h3>
+          <p class="price-note">Cancel anytime</p>
+          <ul>
+            <li>Everything in the free listing</li>
+            <li>Clearly labeled Featured placement</li>
+            <li>Priority placement in the category</li>
+            <li>Longer business description</li>
+            <li>Up to five business photos</li>
+            <li>Prominent contact or website button</li>
+          </ul>
+          <a class="btn primary" href="mailto:nguy3nn0310@gmail.com?subject=Featured%20Business%20Listing%20-%20$30%20per%20month">Choose Featured</a>
+        </article>
+      </div>
+
+      <p class="disclosure"><strong>Advertising disclosure:</strong> Featured businesses pay for additional visibility only. Payment does not purchase a positive review, endorsement, or guarantee of service quality.</p>
     </div>
   </section>
 
